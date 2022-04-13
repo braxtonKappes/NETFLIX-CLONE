@@ -33,5 +33,5 @@ NETFLIX-CLONE is where you explore movies and tv shows to watch with family and 
   
 # Features
 ### Logged in users can perform the following actions.
-    - Add/Remove/Edit/Delete Spots
-    - Add/View/Edit/Delete Reviews
+    - Add/Remove/Edit/Delete Profiles
+    - Add/View/Edit/Delete Channels
