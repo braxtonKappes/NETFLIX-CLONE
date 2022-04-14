@@ -8,11 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      channelId: {
-        type: Sequelize.INTEGER
-      },
       title: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       genre: {
@@ -31,6 +27,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       director: {
+        type: Sequelize.STRING
+      },
+      imgUrl: {
         type: Sequelize.STRING
       },
       createdAt: {

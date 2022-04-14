@@ -2,34 +2,39 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
+import LoginFormModal from '../LoginFormModal';
+import SignUpFormModal from '../SignupFormModal';
+import DemoUser from '../DemoUser';
 
 function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector(state => state.session.user);
 
-  let sessionLinks;
-  if (sessionUser) {
+    let sessionLinks;
+
+    if (sessionUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser} />
+        <ProfileButton user={sessionUser} />
     );
-  } else {
+    } else {
     sessionLinks = (
-      <>
+        <div className='sessionLinks'>
         <LoginFormModal />
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
+        <SignUpFormModal />
+        <DemoUser />
+        </div>
     );
-  }
+}
 
-  return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
-  );
+return (
+    <nav className='navBar'>
+        <NavLink exact to='/' className='logoClickHome'><img alt='Logo' className='bnbLogo'></img></NavLink>
+        <div className='rightContainer'>
+            <NavLink exact to='/spots/host' className='becomeHost'>Become a Host</NavLink>
+            {isLoaded && sessionLinks}
+        </div>
+    </nav>
+    );
 }
 
 export default Navigation;

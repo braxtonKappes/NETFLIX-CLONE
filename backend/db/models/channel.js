@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Channel.init({
-    movieId: DataTypes.INTEGER,
     profileId: DataTypes.INTEGER,
     name: DataTypes.STRING
   }, {

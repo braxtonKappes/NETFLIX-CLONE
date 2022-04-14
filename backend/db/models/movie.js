@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Movie.init({
-    channelId: DataTypes.INTEGER,
     title: DataTypes.STRING,
     genre: DataTypes.STRING,
     rating: DataTypes.INTEGER,
     description: DataTypes.STRING,
     releaseDate: DataTypes.INTEGER,
     casting: DataTypes.STRING,
-    director: DataTypes.STRING
+    director: DataTypes.STRING,
+    imgUrl: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Movie',

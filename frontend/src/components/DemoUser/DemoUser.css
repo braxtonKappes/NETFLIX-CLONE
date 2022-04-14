@@ -1,0 +1,13 @@
+.demoUserButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.demoUserButton > i {
+    font-size: 20px;
+}
