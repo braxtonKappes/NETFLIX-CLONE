@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Movie.belongsToMany(models.Channel, {
         through: "channel_movie",
         as: "channels",
+        otherKey: "channelId",
         foreignKey: "movieId",
       });
     }
