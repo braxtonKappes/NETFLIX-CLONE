@@ -9,7 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       profileId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Profiles'
+        },
       },
       name: {
         type: Sequelize.STRING
