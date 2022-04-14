@@ -17,7 +17,28 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path='/'>
+            
+          </Route>
           <Route path='/login'>
+
+          </Route>
+          <Route path='/signup'>
+
+          </Route>
+          <Route path='/mychannels'>
+
+          </Route>
+          <Route path='/mychannels/channelId'>
+
+          </Route>
+          <Route path='/browse'>
+
+          </Route>
+          <Route path='profiles/manage'>
+
+          </Route>
+          <Route path='profiles/:profileId'>
 
           </Route>
         </Switch>

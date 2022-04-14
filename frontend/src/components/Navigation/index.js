@@ -6,6 +6,8 @@ import './Navigation.css';
 import LoginFormModal from '../LoginFormModal';
 import SignUpFormModal from '../SignupFormModal';
 import DemoUser from '../DemoUser';
+import NetflixLogo from '../../imgs/NetflixLogo_1.png'
+
 
 function Navigation({ isLoaded }){
     const sessionUser = useSelector(state => state.session.user);
@@ -28,9 +30,8 @@ function Navigation({ isLoaded }){
 
 return (
     <nav className='navBar'>
-        <NavLink exact to='/' className='logoClickHome'><img alt='Logo' className='bnbLogo'></img></NavLink>
+        <NavLink exact to='/' className='logoClickHome'><img alt='Logo' className='netflixLogo' src={NetflixLogo}></img></NavLink>
         <div className='rightContainer'>
-            <NavLink exact to='/spots/host' className='becomeHost'>Become a Host</NavLink>
             {isLoaded && sessionLinks}
         </div>
     </nav>

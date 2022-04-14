@@ -11,8 +11,8 @@ function DemoUser() {
         try {
             await dispatch(
             sessionActions.login({
-                credential: "DrewThor",
-                password: "8AmW8fsHsN4HvcjF",
+                credential: "demo@gmail.com",
+                password: "password",
             })
         );
         } catch (err) {
