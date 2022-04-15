@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import * as sessionActions from './store/session';
-import Navigation from './components/Navigation';
+// import Navigation from './components/Navigation';
+import MovieRows from './components/MovieRows/MovieRows';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,31 +15,31 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {/* <Navigation isLoaded={isLoaded} /> */}
       {isLoaded && (
         <Switch>
-          <Route path='/'>
-            
-          </Route>
-          <Route path='/login'>
+          <Route path='/' exact={true}>
 
           </Route>
-          <Route path='/signup'>
+          <Route path='/login' exact={true}>
 
           </Route>
-          <Route path='/mychannels'>
+          <Route path='/signup' exact={true}>
 
           </Route>
-          <Route path='/mychannels/channelId'>
+          <Route path='/mychannels' exact={true}>
 
           </Route>
-          <Route path='/browse'>
+          <Route path='/mychannels/channelId' exact={true}>
 
           </Route>
-          <Route path='profiles/manage'>
+          <Route path='/browse' exact={true}>
+            < MovieRows/>
+          </Route>
+          <Route path='profiles/manage' exact={true}>
 
           </Route>
-          <Route path='profiles/:profileId'>
+          <Route path='profiles/:profileId' exact={true}>
 
           </Route>
         </Switch>
