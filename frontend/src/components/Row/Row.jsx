@@ -13,30 +13,26 @@ function Row({title, fetchUrl, isLargeRow}) {
             const request = await axios.get(fetchUrl)
             setMovies(request.data.results)
             setIsLoaded(true)
-            return request
         }
         fetchData();
     }, [fetchUrl])
+
 
     // console.table(movies)
 
     return isLoaded && (
         <div className='row'>
             <h2 className="row-title">{ title }</h2>
-
             <div className="row-posters">
-
                 {movies.map(movie => (
-                <div key={movie.id} className="movie-wrap">
+                <>
                     <img
-                        className={`row-poster ${isLargeRow && "row-posterLarge"}`}
+                        key={movie.id} className={`row-poster ${isLargeRow && "row-posterLarge"}`}
                         src={`${baseURL}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
                         alt={movie.name}
                     />
-                    <select name="" id="channelDropDown" className="channelDropDown">
-                        <option value="1">1</option>
-                    </select>
-                </div>
+                    <div className="add-to-channel" />
+                </>
                 ))}
             </div>
             {/* container -> posters */}

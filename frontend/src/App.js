@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import * as sessionActions from './store/session';
-// import Navigation from './components/Navigation';
-import MovieRows from './components/MovieRows/MovieRows';
+import Navigation from './components/Navigation/Navigation';
+import Login from './components/Login/Login';
+import BrowseParent from './components/BrowseParent/BrowseParent';
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const user = useSelector(state => state.session?.user);
+
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+
   }, [dispatch]);
 
   return (
-    <>
-      {/* <Navigation isLoaded={isLoaded} /> */}
+    <div className='app'>
+      <Navigation />
       {isLoaded && (
         <Switch>
           <Route path='/' exact={true}>
-
+            {user ? <Login /> : <Redirect to={'/browse'} />}
           </Route>
-          <Route path='/login' exact={true}>
-
+          <Route path='/browse' exact={true}>
+            <BrowseParent />
           </Route>
           <Route path='/signup' exact={true}>
 
@@ -33,18 +37,15 @@ function App() {
           <Route path='/mychannels/channelId' exact={true}>
 
           </Route>
-          <Route path='/browse' exact={true}>
-            < MovieRows/>
-          </Route>
           <Route path='profiles/manage' exact={true}>
 
           </Route>
-          <Route path='profiles/:profileId' exact={true}>
+          <Route path='profiles/manage/:profileId' exact={true}>
 
           </Route>
         </Switch>
       )}
-    </>
+    </div>
   );
 }
 

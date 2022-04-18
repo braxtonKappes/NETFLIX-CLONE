@@ -6,7 +6,7 @@ import request from '../../requests'
 
 function MovieRows() {
     return (
-        <div>
+        <div className='movie-rows'>
             <Row title="NETFLIX ORIGINALS" fetchUrl={request.fetchNetflixOriginals} isLargeRow/>
             <Row title="Trending Now" fetchUrl={request.fetchTrending}/>
             <Row title="Top Rated" fetchUrl={request.fetchTopRated}/>
