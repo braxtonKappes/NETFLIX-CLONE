@@ -60,3 +60,13 @@ margin: 2em 0;
     border: 1px solid white;
     color: white;
 }
+
+.add-profile-button{
+    background-color: transparent;
+    border: 2px solid grey;
+    color: grey;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    font-size: 72px;
+}

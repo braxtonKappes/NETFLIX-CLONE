@@ -18,7 +18,7 @@ function Row({title, fetchUrl, isLargeRow}) {
     }, [fetchUrl])
 
 
-    // console.table(movies)
+    console.log(movies[1])
 
     return isLoaded && (
         <div className='row'>

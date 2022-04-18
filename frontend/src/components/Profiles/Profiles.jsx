@@ -31,6 +31,7 @@ function Profiles() {
                         {/* map profiles here */}
                         {/* await dispatch(profileActions.loadOneProfile()) */}
                     </ul>
+                    <button className='add-profile-button'>+</button>
                 </div>
                 <Link exact to={'/profiles/manage'} className="manage-profiles-button">Manage Profiles</Link>
             </div>

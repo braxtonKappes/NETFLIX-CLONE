@@ -20,7 +20,7 @@ function BrowseParent() {
         }, [dispatch, user.id]);
 
 
-    if (!Object.keys(profile).length) {
+    if (Object.keys(profile).length) {
         return (
             <>
                 <Banner />

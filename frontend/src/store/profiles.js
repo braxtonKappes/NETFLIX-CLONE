@@ -1,7 +1,10 @@
 import { csrfFetch } from "./csrf.js";
 
-const LOAD_ALL = 'profile/LOAD_ALL';
-const LOAD_ONE = 'profile/LOAD_ONE'
+const LOAD_ALL = 'profiles/LOAD_ALL';
+const LOAD_ONE = 'profiles/LOAD_ONE';
+const ADD_PROFILE = 'profiles/ADD_PROFILE'
+const REMOVE_PROFILE = 'profiles/REMOVE_PROFILE'
+const EDIT_PROFILE = 'profiles/EDIT_PROFILE'
 
 // actions
 const loadAll = (profiles) => ({
@@ -13,6 +16,21 @@ const loadOne = (profile) => ({
     type: LOAD_ONE,
     profile
 })
+
+const addProfile = (profile) => ({
+    type: ADD_PROFILE,
+    profile
+});
+
+const removeProfile = (profileId) => ({
+    type: REMOVE_PROFILE,
+    profileId
+});
+
+const editProfile = (updatedProfile) => ({
+    type: EDIT_PROFILE,
+    updatedProfile
+});
 
 // thunks
 export const loadAllProfiles = (userId) => async (dispatch) => {
