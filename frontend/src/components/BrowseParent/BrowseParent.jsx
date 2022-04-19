@@ -12,14 +12,6 @@ function BrowseParent() {
     const profile = useSelector(state => state.profiles?.currentProfile);
 
 
-    useEffect(() => {
-        const fetchUserProfiles = async () => {
-            // await dispatch(profileActions.loadAllProfiles(user.id));
-        }
-        fetchUserProfiles();
-        }, [dispatch, user.id]);
-
-
     if (Object.keys(profile).length) {
         return (
             <>

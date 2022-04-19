@@ -21,11 +21,15 @@
 .netflix-logo{
   position: fixed;
   left: 20px;
-  width: 80px;
+  width: 120px;
   object-fit: contain;
 }
 
-.profile-icon{
+.outer-img{
+  overflow:hidden
+}
+
+.nav-profile-icon{
   position: fixed;
   right: 20px;
   width: 30px;

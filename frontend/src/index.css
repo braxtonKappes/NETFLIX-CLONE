@@ -1,6 +1,16 @@
 * {
     margin: 0;
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    /* overflow-x: hidden; */
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    background-color: transparent;
+    text-decoration: none;
 }
 
 .app{

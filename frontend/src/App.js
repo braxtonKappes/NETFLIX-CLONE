@@ -11,21 +11,19 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const user = useSelector(state => state.session?.user);
 
-
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-
+      dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <div className='app'>
-      <Navigation />
+      <Navigation isLoaded={isLoaded}/>
       {isLoaded && (
         <Switch>
           <Route path='/' exact={true}>
-            {user ? <Login /> : <Redirect to={'/browse'} />}
+            {user ?  <Redirect to={'/browse'} /> : <Login /> }
           </Route>
-          <Route path='/browse' exact={true}>
+          <Route exact path='/browse' >
             <BrowseParent />
           </Route>
           <Route path='/signup' exact={true}>
@@ -34,13 +32,13 @@ function App() {
           <Route path='/mychannels' exact={true}>
 
           </Route>
-          <Route path='/mychannels/channelId' exact={true}>
+          <Route path='/mychannels/:channelId' exact={true}>
 
           </Route>
-          <Route path='profiles/manage' exact={true}>
+          <Route path='/profiles/manage' exact={true}>
 
           </Route>
-          <Route path='profiles/manage/:profileId' exact={true}>
+          <Route path='/profiles/manage/:profileId' exact={true}>
 
           </Route>
         </Switch>

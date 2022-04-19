@@ -1,6 +1,53 @@
-.log-body{
+.login-wrapper{
+    position: relative;
+}
+
+.login-wrapper-background{
+    min-height: 100vh;
+    min-width: 100vw;
+    object-fit: contain;
+    position: absolute;
+    z-index: 1;
+}
+
+.login-body{
+    color: #333;
+    position: absolute;
+    padding: 0 5%;
     margin: 0 auto -236px;
     min-height: 100vh;
     background-color: transparent;
     max-width: 450px;
+    z-index: 2;
+}
+
+.login-body::before{
+    content: "";
+    height: 91px;
+    display: block;
+}
+
+.login-body::after{
+    content: "";
+    height: 236px;
+    display: block;
+}
+
+.login-page-title{
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 28px;
+}
+
+.login-form{
+    background-color: rgba(0,0,0,.75);
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 515px;
+    padding: 20px 0 30px;
+    width: 100%;
 }

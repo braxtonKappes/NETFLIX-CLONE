@@ -10,8 +10,6 @@ const { handleValidationErrors } = require('../../utils/validation');
 router.get('/all/:userId',
 asyncHandler(async(req, res) => {
     const paramId = req.params.userId * 1;
-    console.log('HELLOOOOO', res)
-    console.log('HELLOOOOO', paramId)
     const profiles = await Profile.findAll({
         where: {
             userId: paramId
@@ -23,8 +21,9 @@ asyncHandler(async(req, res) => {
 // Getting one profile
 router.get('/one/:profileId',
 asyncHandler(async(req, res) => {
-    const profileId = req.params.id * 1;
-    const spot = await Profile.findByPk(profileId)
+    const profileId = req.params.profileId * 1;
+    console.log(profileId)
+    const profile = await Profile.findByPk(profileId)
     return res.json(profile)
 }));
 
@@ -55,7 +54,7 @@ asyncHandler(async (req, res) => {
     const { icon, name } = req.body;
     const selectedProfile = await Profile.findByPk(profileId)
     await selectedProfile.update({ icon, name });
-    const profile = await Spot.findByPk(profileId)
+    const profile = await Profile.findByPk(profileId)
     return res.json(profile)
 }))
 

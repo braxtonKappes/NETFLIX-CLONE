@@ -1,34 +1,26 @@
 import React from "react";
 import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import './DemoUser.css'
 
 function DemoUser() {
+    const history = useHistory();
     const dispatch = useDispatch();
+
     const demoUserLogin = async (e) => {
         e.preventDefault()
 
-        try {
-            await dispatch(
-            sessionActions.login({
-                credential: "demo@gmail.com",
-                password: "password",
-            })
-        );
-        } catch (err) {
-            console.error("error: ", err)
-        }
-
+        await dispatch(sessionActions.login({ credential: "demo@gmail.com", password: "password" }));
+        history.push('/browse')
     };
 
     return (
         <div>
-            <form onSubmit={demoUserLogin}>
-                <button id='' className="demoUserButton">
-                    <i className="fa-solid fa-user"></i>
-                    <p>Demo User</p>
-                </button>
-            </form>
+            <button onClick={demoUserLogin} id='' className="demoUserButton">
+                <i className="fa-solid fa-user"></i>
+                <p>Demo User</p>
+            </button>
         </div>
     )
 }

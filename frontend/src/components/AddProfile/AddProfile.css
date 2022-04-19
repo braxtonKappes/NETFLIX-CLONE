@@ -1,0 +1,86 @@
+.add-profile-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    background: #141414;
+}
+
+.add-profile-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.list-profiles{
+    width: 100%;
+    color: #fff;
+    font-size: 3.5vw;
+    font-weight: unset;
+}
+
+.choose-profile{
+margin: 2em 0;
+}
+
+.whos-watching{
+    text-align: center;
+    display: block;
+    font-size: 3rem;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.add-profile-buttons{
+    display: flex;
+}
+
+.back-add-profile-button{
+    background: #fff;
+    text-decoration: none;
+    border: none;
+    color: #000;
+    font-weight: 700;
+    display: block;
+    margin: 2em 0 1em 0;
+    font-size: 1.2vw;
+    padding: 0.5em 1.5em;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.back-add-profile-button:hover{
+    background-color: red;
+    color: white;
+}
+
+.add-profile-done-button{
+    background: #fff;
+    text-decoration: none;
+    border: none;
+    color: #000;
+    font-weight: 700;
+    display: block;
+    margin: 2em 2em 1em 0;
+    font-size: 1.2vw;
+    padding: 0.5em 1.5em;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.add-profile-done-button:hover{
+    background-color: red;
+    color: white;
+}
