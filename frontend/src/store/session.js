@@ -53,7 +53,9 @@ export const logout = () => async (dispatch) => {
 };
 
 function reducer(state={
-  user: {}
+  user: {
+    
+  },
   },action) {
   let newState={...state};
   switch (action.type) {

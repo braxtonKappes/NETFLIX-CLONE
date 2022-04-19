@@ -31,7 +31,7 @@ function Profiles() {
             <div className="profiles-wrapper">
                 <h1 className="whos-watching">Who's watching?</h1>
                 <div className="choose-profile">
-                    {profiles.map(profile => (
+                    {profiles?.map(profile => (
                         <div key={profile.id} className="profile">
                             <div className="icon-container">
                                 <img
