@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import './DemoUser.css'
+import DemoUser_profile_icon from '../../imgs/DemoUser-profile-icon.png'
+
 
 function DemoUser() {
     const history = useHistory();
@@ -17,10 +19,10 @@ function DemoUser() {
 
     return (
         <div>
-            <button onClick={demoUserLogin} id='' className="demoUserButton">
-                <i className="fa-solid fa-user"></i>
-                <p>Demo User</p>
-            </button>
+            <div onClick={demoUserLogin} id='' className="demoUserButton">
+                <img src={DemoUser_profile_icon} />.
+                <h2>Demo User</h2>
+            </div>
         </div>
     )
 }

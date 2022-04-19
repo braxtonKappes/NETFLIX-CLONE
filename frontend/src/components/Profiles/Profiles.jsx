@@ -10,8 +10,8 @@ function Profiles() {
     const [showComponent, setShowComponent] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false);
     // const [selectedProfileId, setSelectedProfileId] = useState('');
-    const user = useSelector(state => state.session.user);
-    const profiles = useSelector(state => Object.values(state.profiles.allProfiles))
+    const user = useSelector(state => state.session?.user);
+    const profiles = useSelector(state => Object.values(state.profiles?.allProfiles))
 
 
     useEffect(() => {
@@ -20,7 +20,7 @@ function Profiles() {
             setIsLoaded(true)
         }
         fetchProfiles();
-    }, [dispatch]);
+    }, [dispatch, user.id]);
 
     if (showComponent) {
         return isLoaded && (
@@ -32,7 +32,7 @@ function Profiles() {
                 <h1 className="whos-watching">Who's watching?</h1>
                 <div className="choose-profile">
                     {profiles.map(profile => (
-                        <div className="profile">
+                        <div key={profile.id} className="profile">
                             <div className="icon-container">
                                 <img
                                 onClick={() => dispatch(profileActions.loadOneProfile(profile.id))}
@@ -48,7 +48,7 @@ function Profiles() {
                     ))}
                 <button className='add-profile-button' onClick={() => setShowComponent(true)}>+</button>
                 </div>
-                <Link exact to={'/profiles/manage'} className="manage-profiles-button">Manage Profiles</Link>
+                <Link to={'/profiles/manage'} className="manage-profiles-button">Manage Profiles</Link>
             </div>
         )
     }

@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import * as sessionActions from "../../store/session";
 import './Login.css'
-import NetflixBG from '../../imgs/netflix-bg-img.jpg'
 import DemoUser from '../DemoUser/index'
+import SignUp from '../SignUp/SignUp';
 
 function Login() {
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
+    const [showSignUpComponent, setShowSignUpComponent] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,10 +23,14 @@ function Login() {
         );
     };
 
-    return (
+    if (showSignUpComponent) {
+        return (
+            <SignUp setShowSignUpComponent={setShowSignUpComponent} />
+        )
+    } else {
+        return (
         <>
         <div className="login-wrapper">
-            <img src={NetflixBG} alt="netflix-background-collage" className="login-wrapper-background" />
             <div className='login-body'>
                 <div className="login-content">
                     <form action="" className="login-form" onSubmit={handleSubmit}>
@@ -37,32 +42,39 @@ function Login() {
                             </li>
                             )}
                         </ul>
-                        <input
-                        className="email-input"
-                        type="email"
-                        placeholder='Email or phone number'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        />
-                        <input
-                        className="password-input"
-                        type="text"
-                        placeholder='Password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <button id='buttonCard' className="loginButton" type="submit">Sign In</button>
-                        <div className="new-to-netflix-container">
-                            New to Netflix? <a href="/signup" target="_self" className="">Sign up now</a>
+                        <div className="email-input">
+                            <input
+                            className="email-input"
+                            type="email"
+                            placeholder='Email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            />
                         </div>
-                        <DemoUser />
+                        <div className="password-input">
+                            <input
+                            className="password-input"
+                            type="text"
+                            placeholder='Password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+                        <button id='buttonCard' className="login-button" type="submit">Sign In</button>
+                        <div className="new-to-netflix-container">
+                            New to Netflix-Clone? <button onClick={() => setShowSignUpComponent(true)}>Sign up now</button>
+                        </div>
+                        <div className="login-DemoUser-button">
+                            <DemoUser />
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
         </>
     )
+    }
 }
 
 export default Login

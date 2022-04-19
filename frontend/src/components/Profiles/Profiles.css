@@ -133,3 +133,17 @@
     border: 2px solid rgba(255, 255, 255, 0.7);
     color: rgba(255, 255, 255, 0.7);
 }
+
+.profile-dropdown{
+    box-sizing: border-box;
+    color: #fff;
+    cursor: default;
+    display: block;
+    font-size: 13px;
+    height: auto;
+    line-height: 21px;
+    margin: 0;
+    overflow: hidden;
+    padding: 10px 0 5px;
+    width: 100%;
+}

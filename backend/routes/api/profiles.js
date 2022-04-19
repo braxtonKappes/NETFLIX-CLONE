@@ -22,7 +22,6 @@ asyncHandler(async(req, res) => {
 router.get('/one/:profileId',
 asyncHandler(async(req, res) => {
     const profileId = req.params.profileId * 1;
-    console.log(profileId)
     const profile = await Profile.findByPk(profileId)
     return res.json(profile)
 }));

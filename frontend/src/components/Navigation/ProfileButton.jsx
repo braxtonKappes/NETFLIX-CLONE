@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 
-function ProfileButton({ user }) {
+function ProfileButton({ currentProfile }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const profiles = useSelector(state => Object.values(state.profiles.allProfiles))
 
   const openMenu = () => {
     if (showMenu) return;
@@ -31,16 +32,22 @@ function ProfileButton({ user }) {
     history.push('/')
   };
 
-  return (
+  return Object.keys(currentProfile).length && (
     <div className="profile-dropdown-wrapper">
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      <img onClick={openMenu} src={currentProfile.icon} alt="" className="current-profile-dropdown-icon" />
       {showMenu && (
         <div className="profile-dropdown">
-          {user.username}
-          {user.email}
-          <button onClick={logout}>Log Out</button>
+          <div className="dropdown-profiles-list">
+            {profiles.map(profile => (
+              <div key={profile.id} className="dropdown-profile-container">
+                <img src={profile.icon} alt="" className="dropdown-profile-icon" />
+                <div className="dropdown-profile-name">
+                  {profile.name}
+                </div>
+              </div>
+            ))}
+            <button onClick={logout}>Log Out</button>
+          </div>
         </div>
       )}
     </div>

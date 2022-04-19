@@ -39,7 +39,6 @@ export const loadAllProfiles = (userId) => async (dispatch) => {
 
     if (res.ok) {
         const profiles = await res.json();
-        console.log(profiles)
         dispatch(loadAll(profiles));
     }
 }
@@ -114,12 +113,12 @@ const profilesReducer = (state={
             newState.allProfiles[action.profile.id] = action.profile
             return newState;
         }
-        case REMOVE_PROFILE: {
-            delete newState.allProfiles[action.profileId]
-            return newState;
-        }
         case EDIT_PROFILE: {
             newState.allProfiles[action.updatedProfile.id] = action.updatedProfile
+            return newState;
+        }
+        case REMOVE_PROFILE: {
+            delete newState.allProfiles[action.profileId]
             return newState;
         }
         default:

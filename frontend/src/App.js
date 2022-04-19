@@ -5,6 +5,7 @@ import * as sessionActions from './store/session';
 import Navigation from './components/Navigation/Navigation';
 import Login from './components/Login/Login';
 import BrowseParent from './components/BrowseParent/BrowseParent';
+import ManageProfiles from './components/ManageProfiles/ManageProfiles';
 
 function App() {
   const dispatch = useDispatch();
@@ -20,25 +21,25 @@ function App() {
       <Navigation isLoaded={isLoaded}/>
       {isLoaded && (
         <Switch>
-          <Route path='/' exact={true}>
-            {user ?  <Redirect to={'/browse'} /> : <Login /> }
+          <Route exact path='/'>
+            { user ?  <Redirect to={'/browse'} /> : <Login /> }
           </Route>
-          <Route exact path='/browse' >
+          <Route exact path='/browse'>
             <BrowseParent />
           </Route>
-          <Route path='/signup' exact={true}>
+          <Route exact path='/signup'>
 
           </Route>
-          <Route path='/mychannels' exact={true}>
+          <Route exact path='/mychannels'>
 
           </Route>
-          <Route path='/mychannels/:channelId' exact={true}>
+          <Route  exact path='/mychannels/:channelId'>
 
           </Route>
-          <Route path='/profiles/manage' exact={true}>
-
+          <Route exact path='/profiles/manage'>
+            <ManageProfiles />
           </Route>
-          <Route path='/profiles/manage/:profileId' exact={true}>
+          <Route exact path='/profiles/manage/:profileId'>
 
           </Route>
         </Switch>
