@@ -12,9 +12,10 @@ function Navigation(){
     const history = useHistory()
     const [handleShow, setHandleShow] = useState(false)
     const currentProfile = useSelector(state => state.profiles.currentProfile);
+    const user = useSelector(state => state.session?.user)
 
     const handleOnClickLogo = () => {
-        history.push('/browse')
+        history.push('/')
     }
 
     useEffect(() => {

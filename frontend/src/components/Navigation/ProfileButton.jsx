@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
+import * as profileActions from '../../store/profiles';
 
 function ProfileButton({ currentProfile }) {
   const history = useHistory();
@@ -30,6 +31,7 @@ function ProfileButton({ currentProfile }) {
     e.preventDefault();
     await dispatch(sessionActions.logout());
     history.push('/')
+    await dispatch(profileActions.clearAllProfileState());
   };
 
   return Object.keys(currentProfile).length && (
@@ -38,7 +40,7 @@ function ProfileButton({ currentProfile }) {
       {showMenu && (
         <div className="profile-dropdown">
           <div className="dropdown-profiles-list">
-            {profiles.map(profile => (
+            {profiles.filter((profile) => profile.id !== currentProfile.id).map(profile => (
               <div key={profile.id} className="dropdown-profile-container">
                 <img src={profile.icon} alt="" className="dropdown-profile-icon" />
                 <div className="dropdown-profile-name">

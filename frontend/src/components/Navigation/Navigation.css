@@ -33,6 +33,7 @@
   position: fixed;
   right: 30px;
   width: 30px;
+  z-index: 111;
 }
 
 .current-profile-dropdown-icon{

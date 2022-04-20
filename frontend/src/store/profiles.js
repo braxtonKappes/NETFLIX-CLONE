@@ -5,6 +5,8 @@ const LOAD_ONE = 'profiles/LOAD_ONE';
 const ADD_PROFILE = 'profiles/ADD_PROFILE'
 const REMOVE_PROFILE = 'profiles/REMOVE_PROFILE'
 const EDIT_PROFILE = 'profiles/EDIT_PROFILE'
+const CLEAR_PROFILES_STATE = '/profiles/CLEAR_PROFILES_STATE'
+const CLEAR_CURRENT_PROFILE_STATE = '/profiles/CLEAR_CURRENT_PROFILE_STATE'
 
 // actions
 const loadAll = (profiles) => ({
@@ -31,6 +33,14 @@ const editProfile = (updatedProfile) => ({
     type: EDIT_PROFILE,
     updatedProfile
 });
+
+const clearAllProfilesState = () => ({
+    type: CLEAR_PROFILES_STATE,
+});
+
+const clearCurrentProfileStateAction = () => ({
+    type: CLEAR_CURRENT_PROFILE_STATE
+})
 
 /* thunks */
 // Get all profiles
@@ -92,6 +102,16 @@ export const putProfile = (data) => async (dispatch) => {
     }
 }
 
+// Clear ALL profile state
+export const clearAllProfileState = () => async (dispatch) => {
+    dispatch(clearAllProfilesState())
+}
+
+// Clear current profile
+export const clearCurrentProfileState = () => async (dispatch) => {
+    dispatch(clearCurrentProfileStateAction())
+}
+
 // Reducer
 const profilesReducer = (state={
     currentProfile: {},
@@ -120,6 +140,14 @@ const profilesReducer = (state={
         case REMOVE_PROFILE: {
             delete newState.allProfiles[action.profileId]
             return newState;
+        }
+        case CLEAR_PROFILES_STATE: {
+            newState.allProfiles = {}
+            newState.currentProfile = {}
+            return newState;
+        }
+        case CLEAR_CURRENT_PROFILE_STATE: {
+            newState.currentProfile = {}
         }
         default:
             return state;

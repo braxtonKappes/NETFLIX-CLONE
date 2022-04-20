@@ -6,7 +6,7 @@ import MovieRows from '../MovieRows/MovieRows'
 import Profiles from '../Profiles/Profiles'
 
 function BrowseParent() {
-    const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session?.user)
     const profile = useSelector(state => state.profiles?.currentProfile);
 
     // if (Object.keys(session).length) {

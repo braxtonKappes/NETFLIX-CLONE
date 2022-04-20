@@ -17,9 +17,6 @@ function Row({title, fetchUrl, isLargeRow}) {
         fetchData();
     }, [fetchUrl])
 
-
-    console.table(movies)
-
     return isLoaded && (
         <div className='row'>
             <h2 className="row-title">{ title }</h2>

@@ -12,11 +12,31 @@ const validateSignup = [
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage('Please provide a valid email.'),
+    .withMessage('Please provide a valid email.')
+    .custom(async (_value, { req }) => {
+      const query = await User.findOne({
+          where: { email: req.body.email },
+      });
+      if (query) {
+          return await Promise.reject(
+              "That email is already being used. Try a different email address or login."
+          );
+      }
+  }),
   check('username')
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
-    .withMessage('Please provide a username with at least 4 characters.'),
+    .withMessage('Please provide a username with at least 4 characters.')
+    .custom(async (_value, { req }) => {
+      const query = await User.findOne({
+          where: { username: req.body.username },
+      });
+      if (query) {
+          return await Promise.reject(
+              "That username is already taken. Type a new username or login."
+          );
+      }
+  }),
   check('username')
     .not()
     .isEmail()

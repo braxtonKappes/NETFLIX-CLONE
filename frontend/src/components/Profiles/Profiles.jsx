@@ -31,7 +31,7 @@ function Profiles() {
             <div className="profiles-wrapper">
                 <h1 className="whos-watching">Who's watching?</h1>
                 <div className="choose-profile">
-                    {profiles.map(profile => (
+                    {profiles?.map(profile => (
                         <div key={profile.id} className="profile">
                             <div className="icon-container">
                                 <img
@@ -46,7 +46,9 @@ function Profiles() {
                             </div>
                         </div>
                     ))}
-                <button className='add-profile-button' onClick={() => setShowComponent(true)}>+</button>
+                <div className="add-profile-button-container">
+                    <button className='add-profile-button' onClick={() => setShowComponent(true)}>+</button>
+                </div>
                 </div>
                 <Link to={'/profiles/manage'} className="manage-profiles-button">Manage Profiles</Link>
             </div>

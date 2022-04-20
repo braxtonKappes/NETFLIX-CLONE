@@ -113,13 +113,25 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
+.add-profile-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+}
+
 .add-profile-button{
     background-color: transparent;
     border: 2px solid grey;
     cursor: pointer;
     color: grey;
-    height: 200px;
-    width: 200px;
+    height: 10vw;
+    width: 10vw;
+    max-height: 200px;
+    max-width: 200px;
+    min-height: 84px;
+    min-width: 84px;
     border-radius: 50%;
     font-size: 72px;
 }
