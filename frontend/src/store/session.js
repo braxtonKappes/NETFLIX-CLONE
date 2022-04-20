@@ -48,34 +48,10 @@ export const logout = () => async (dispatch) => {
 };
 
 function reducer(state={
-<<<<<<< HEAD
-  user: {
-
-  },
-=======
-  user: { profiles: { channels: { movies: {}}}},
->>>>>>> e248f52f8f7613419521697eec4cac271734a007
+  user: {},
   },action) {
   let newState = {...state};
   switch (action.type) {
-    case LOAD_ALL_PROFILES: {
-      action.profiles.forEach(profile => {
-          newState.allProfiles[profile.id] = profile;
-      });
-      return newState;
-    }
-    case ADD_PROFILE: {
-        newState.allProfiles[action.profile.id] = action.profile
-        return newState;
-    }
-    case EDIT_PROFILE: {
-        newState.allProfiles[action.updatedProfile.id] = action.updatedProfile
-        return newState;
-    }
-    case REMOVE_PROFILE: {
-        delete newState.allProfiles[action.profileId]
-        return newState;
-    }
       case SET_USER:
         newState.user = action.newUser;
         return newState;
