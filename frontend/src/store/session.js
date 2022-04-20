@@ -3,15 +3,7 @@ import { csrfFetch } from "./csrf.js";
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
-const setUser = (newUser) => ({
-  type: SET_USER,
-  newUser
-});
-
-const removeUser = () => ({
-  type: REMOVE_USER,
-});
-
+// Login user
 export const login = ({ credential, password }) => async dispatch => {
   const response = await csrfFetch("/api/session", {
     method: "POST",
@@ -22,6 +14,7 @@ export const login = ({ credential, password }) => async dispatch => {
   return response;
 };
 
+// Restore user
 export const restoreUser = () => async dispatch => {
   const response = await csrfFetch("/api/session");
   const data = await response.json();
@@ -29,6 +22,7 @@ export const restoreUser = () => async dispatch => {
   return response;
 };
 
+// Signup new user
 export const signup = (user) => async (dispatch) => {
   const { username, email, password } = user;
   const response = await csrfFetch("/api/users", {
@@ -44,6 +38,7 @@ export const signup = (user) => async (dispatch) => {
   return response;
 };
 
+// Logout user
 export const logout = () => async (dispatch) => {
   const response = await csrfFetch("/api/session", {
     method: "DELETE",
@@ -53,20 +48,42 @@ export const logout = () => async (dispatch) => {
 };
 
 function reducer(state={
+<<<<<<< HEAD
   user: {
 
   },
+=======
+  user: { profiles: { channels: { movies: {}}}},
+>>>>>>> e248f52f8f7613419521697eec4cac271734a007
   },action) {
-  let newState={...state};
+  let newState = {...state};
   switch (action.type) {
-    case SET_USER:
-      newState.user = action.newUser;
+    case LOAD_ALL_PROFILES: {
+      action.profiles.forEach(profile => {
+          newState.allProfiles[profile.id] = profile;
+      });
       return newState;
-    case REMOVE_USER:
-      newState = Object.assign({}, state, { user: null });
-      return newState;
-    default:
-      return state;
+    }
+    case ADD_PROFILE: {
+        newState.allProfiles[action.profile.id] = action.profile
+        return newState;
+    }
+    case EDIT_PROFILE: {
+        newState.allProfiles[action.updatedProfile.id] = action.updatedProfile
+        return newState;
+    }
+    case REMOVE_PROFILE: {
+        delete newState.allProfiles[action.profileId]
+        return newState;
+    }
+      case SET_USER:
+        newState.user = action.newUser;
+        return newState;
+      case REMOVE_USER:
+        newState = Object.assign({}, state, { user: null });
+        return newState;
+      default:
+        return state;
   }
 }
 
