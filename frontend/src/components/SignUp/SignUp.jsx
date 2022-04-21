@@ -16,7 +16,14 @@ function SignUp({setShowSignUpComponent}) {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            return dispatch(sessionActions.signup({ email, username, password }))
+            const newUsername = username.toLowerCase();
+            const newEmail = email.toLowerCase();
+            const data = {
+                email: newEmail,
+                username: newUsername,
+                password: password,
+            }
+            return dispatch(sessionActions.signup(data))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
@@ -79,6 +86,7 @@ function SignUp({setShowSignUpComponent}) {
                                 <img alt='side_arrow' src={sideArrow} className="signup-form-side-arrow" />
                             </button>
                         </form>
+                        <button onClick={() => setShowSignUpComponent(false)} className="back-add-profile-button">Back</button>
                     </div>
                 </div>
             </div>

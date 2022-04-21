@@ -1,0 +1,19 @@
+.epi-wrapper{
+    align-items: center;
+    bottom: 0;
+    color: #fff;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    font-family: "Netflix Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14.4px;
+    justify-content: center;
+    left: 0;
+    line-height: 17.28px;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    z-index: 100;
+}

@@ -15,7 +15,8 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ credential, password })).catch(
+        const credentialLowerCased = credential.toLowerCase();
+        return dispatch(sessionActions.login({ credentialLowerCased, password })).catch(
             async (res) => {
             const data = await res.json();
             if (data && data.errors) setErrors(data.errors);
@@ -23,9 +24,11 @@ function Login() {
         );
     };
 
+    const filteredErrors = errors.filter(error => error !== 'Invalid value')
+
     if (showSignUpComponent) {
         return (
-            <SignUp setShowSignUpComponent={setShowSignUpComponent} />
+            <SignUp setShowSignUpComponent={setShowSignUpComponent}/>
         )
     } else {
         return (
@@ -35,8 +38,8 @@ function Login() {
                 <div className="login-content">
                     <form action="" className="login-form" onSubmit={handleSubmit}>
                         <h1 className="login-page-title">Sign In</h1>
-                        <ul className={errors.length > 0 ? "errorList" : "hideErrorList"}>
-                            {errors.map((error, idx) =>
+                        <ul className={filteredErrors.length > 0 ? "errorList" : "hideErrorList"}>
+                            {filteredErrors.map((error, idx) =>
                             <li key={idx}>
                                 * {error}
                             </li>

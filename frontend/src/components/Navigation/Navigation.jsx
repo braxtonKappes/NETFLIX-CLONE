@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 function Navigation(){
     const history = useHistory()
     const [handleShow, setHandleShow] = useState(false)
-    const currentProfile = useSelector(state => state.profiles.currentProfile);
+    const currentProfile = useSelector(state => state.profiles?.currentProfile);
 
     const handleOnClickLogo = () => {
         history.push('/')
@@ -17,13 +17,11 @@ function Navigation(){
     useEffect(() => {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
-                setHandleShow(true)
-            } else {
-                setHandleShow(false)
-            }
+                setHandleShow(true);
+            } else setHandleShow(false);
         });
         return () => {
-            window.removeEventListener('scroll');
+            window.removeEventListener('scroll', null);
         };
     }, []);
 

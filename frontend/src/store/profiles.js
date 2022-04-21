@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf.js";
 
 const LOAD_ALL = 'profiles/LOAD_ALL';
 const LOAD_ONE = 'profiles/LOAD_ONE';
+const LOAD_ONE_EDIT = 'profiles/LOAD_ONE_EDIT'
 const ADD_PROFILE = 'profiles/ADD_PROFILE'
 const REMOVE_PROFILE = 'profiles/REMOVE_PROFILE'
 const EDIT_PROFILE = 'profiles/EDIT_PROFILE'
@@ -19,6 +20,11 @@ const loadOne = (profile) => ({
     profile
 })
 
+const loadOneToEdit = (profile) => ({
+    type: LOAD_ONE_EDIT,
+    profile
+})
+
 const createProfile = (profile) => ({
     type: ADD_PROFILE,
     profile
@@ -29,7 +35,7 @@ const removeProfile = (profileId) => ({
     profileId
 });
 
-const editProfile = (updatedProfile) => ({
+const editAProfile = (updatedProfile) => ({
     type: EDIT_PROFILE,
     updatedProfile
 });
@@ -65,6 +71,16 @@ export const loadOneProfile = (profileId) => async (dispatch) => {
     return res;
 }
 
+// Get one profile to edit
+export const loadOneProfileToEdit = (profileId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/profiles/one/${profileId}`);
+    if (res.ok) {
+        const profile = await res.json();
+        dispatch(loadOneToEdit(profile))
+    }
+    return res;
+}
+
 // Add a profile
 export const addProfile = (data) => async (dispatch) => {
     const res = await csrfFetch(`/api/profiles`, {
@@ -73,15 +89,15 @@ export const addProfile = (data) => async (dispatch) => {
     });
     if (res.ok) {
         const profileData  = await res.json();
-        dispatch(createProfile(profileData.profile));
+        dispatch(createProfile(profileData));
         return profileData;
     }
     return res;
 }
 
-// Delete a spot
+// Delete a profile
 export const delProfile = (profileId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/profiles/${profileId}`, {
+    const res = await csrfFetch(`/api/profiles`, {
         method: `DELETE`,
         body: JSON.stringify({profileId}),
     });
@@ -94,14 +110,14 @@ export const delProfile = (profileId) => async (dispatch) => {
 }
 
 // Edit a profile
-export const putProfile = (data) => async (dispatch) => {
+export const editProfile = (data) => async (dispatch) => {
     const res = await csrfFetch(`/api/profiles`, {
         method: "PUT",
         body: JSON.stringify(data),
     })
     if (res.ok) {
         const updatedProfile = await res.json()
-        dispatch(editProfile(updatedProfile))
+        dispatch(editAProfile(updatedProfile))
         return updatedProfile;
     }
     return res;
@@ -120,6 +136,7 @@ export const clearCurrentProfileState = () => async (dispatch) => {
 // Reducer
 const profilesReducer = (state={
     currentProfile: {},
+    editProfile: {},
     allProfiles: {}
     }, action) => {
     let newState = {...state};
@@ -128,6 +145,10 @@ const profilesReducer = (state={
             action.profiles.forEach(profile => {
                 newState.allProfiles[profile.id] = profile;
             });
+            return newState;
+        }
+        case LOAD_ONE_EDIT: {
+            newState.editProfile = action.profile
             return newState;
         }
         case LOAD_ONE: {

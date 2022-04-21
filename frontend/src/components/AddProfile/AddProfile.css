@@ -39,10 +39,6 @@
     align-items: center;
 }
 
-.choose-profile-icon{
-
-}
-
 .add-profile-title{
     text-align: center;
     display: block;
@@ -64,7 +60,6 @@
     background-color: #333;
     background-repeat: no-repeat no-repeat;
     background-size: cover;
-    border-color: #e5e5e5;
     border-radius: 4px;
     border-style: none;
     box-sizing: border-box;
@@ -87,20 +82,6 @@
     border: 3px solid #ffffff;
 }
 
-.add-profile-icon:checked + .selected-profile-icon{
-    display: block;
-}
-
-.selected-profile-icon{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    display: none;
-}
-
 .add-profile-icon::after{
     border: .3rem solid #e5e5e5;
     border-radius: 4px;
@@ -110,6 +91,28 @@
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.add-profile-icon-selected{
+    background-color: rgb(51, 51, 51);
+    background-repeat: no-repeat no-repeat;
+    background-size: cover;
+    border: 3px solid #21c405;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    height: 10vw;
+    line-height: 17.28px;
+    max-height: 200px;
+    max-width: 200px;
+    min-height: 84px;
+    min-width: 84px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 10vw;
+    margin-right: 30px;
 }
 
 .add-profile-name{
@@ -126,7 +129,7 @@
     height: 70px;
     line-height: normal;
     list-style: none;
-    margin: 1px 0 0 0;
+    margin: 5px 0 0 0;
     min-width: 500px;
     padding: 10px 10px 0;
     width: auto;

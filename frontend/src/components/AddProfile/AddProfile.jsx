@@ -10,11 +10,53 @@ import './AddProfile.css'
 
 function AddProfile({ setShowComponent }) {
     const dispatch = useDispatch();
-    const [profileName, setProfileName] = useState("");
-    const [profileIcon, setProfileIcon] = useState("");
+    const [profileName, setProfileName] = useState('');
+    const [profileIcon, setProfileIcon] = useState(null);
+    const [banditIcon, setBanditIcon] = useState(false);
+    const [pandaIcon, setPandaIcon] = useState(false);
+    const [redChickenIcon, setRedChickenIcon] = useState(false);
+    const [robotIcon, setRobotIcon] = useState(false);
+    const [superWomanIcon, setSuperWomanIcon] = useState(false);
     const [errors, setErrors] = useState([]);
     const userId = useSelector(state => state.session.user.id);
 
+    const unselect = () => {
+        setBanditIcon(false)
+        setPandaIcon(false)
+        setRedChickenIcon(false)
+        setRobotIcon(false)
+        setSuperWomanIcon(false)
+    }
+
+    const selectBandit = () => {
+        unselect();
+        setProfileIcon('/profile-icons/number_5_bandit.png');
+        setBanditIcon(true)
+    }
+
+    const selectPanda = () => {
+        unselect();
+        setProfileIcon('/profile-icons/panda.png');
+        setPandaIcon(true)
+    }
+
+    const selectRedChicken = () => {
+        unselect();
+        setProfileIcon('/profile-icons/red_chicken.png');
+        setRedChickenIcon(true)
+    }
+
+    const selectSuperWoman = () => {
+        unselect();
+        setProfileIcon('/profile-icons/super_woman.png');
+        setSuperWomanIcon(true)
+    }
+
+    const selectRobot = () => {
+        unselect();
+        setProfileIcon('/profile-icons/robot_face.png');
+        setRobotIcon(true)
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,8 +68,9 @@ function AddProfile({ setShowComponent }) {
             name: profileName,
         }
         try {
-            await dispatch(profileActions.addProfile(data))
-            await dispatch(profileActions.loadAllProfiles(userId))
+            await dispatch(profileActions.addProfile(data));
+            setProfileName('')
+            setProfileIcon(null)
             setShowComponent(false)
         } catch (res) {
             const data = await res.json();
@@ -53,35 +96,34 @@ function AddProfile({ setShowComponent }) {
                     <form onSubmit={handleSubmit} className="add-profile-form">
                         <div className="choose-profile-icon">
                             <img
-                                type="checkbox"
-                                onClick={() => setProfileIcon('/profile-icons/number_5_bandit.png')}
+                                onClick={selectBandit}
                                 src={bandit_icon}
                                 alt="bandit_profile-icon"
-                                className="add-profile-icon"
+                                className={banditIcon ? "add-profile-icon-selected" : "add-profile-icon"}
                             />
                             <img
-                                onClick={() => setProfileIcon('/profile-icons/panda.png')}
+                                onClick={selectPanda}
                                 src={panda_icon}
                                 alt="panda_icon"
-                                className="add-profile-icon"
+                                className={pandaIcon ? "add-profile-icon-selected" : "add-profile-icon"}
                             />
                             <img
-                                onClick={() => setProfileIcon('/profile-icons/super_woman.png')}
+                                onClick={selectSuperWoman}
                                 src={super_woman_icon}
                                 alt="super_woman_icon"
-                                className="add-profile-icon"
+                                className={superWomanIcon ? "add-profile-icon-selected" : "add-profile-icon"}
                             />
                             <img
-                                onClick={() => setProfileIcon('/profile-icons/red_chicken.png')}
+                                onClick={selectRedChicken}
                                 src={red_chicken_icon}
                                 alt="red_chicken_icon"
-                                className="add-profile-icon"
+                                className={redChickenIcon ? "add-profile-icon-selected" : "add-profile-icon"}
                             />
                             <img
-                                onClick={() => setProfileIcon('/profile-icons/robot_face.png')}
+                                onClick={selectRobot}
                                 src={robot_face_icon}
-                                alt="robot_face_icon"
-                                className="add-profile-icon"
+                                alt="robot_icon"
+                                className={robotIcon ? "add-profile-icon-selected" : "add-profile-icon"}
                             />
                         </div>
                         <input

@@ -6,6 +6,18 @@ const { requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+const validateProfile = [
+    check('icon')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage('Please select a profile icon.'),
+    check('name')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 1, max: 10 })
+        .withMessage('Please provide a valid profile name.'),
+    handleValidationErrors,
+];
+
 // Get all profiles
 router.get('/all/:userId',
 asyncHandler(async(req, res) => {
@@ -29,6 +41,7 @@ asyncHandler(async(req, res) => {
 // Add a profile
 router.post('/',
 requireAuth,
+validateProfile,
 asyncHandler(async (req, res) => {
     const { userId, icon, name } = req.body;
     const profile = await Profile.create({ userId, icon, name });
@@ -36,10 +49,10 @@ asyncHandler(async (req, res) => {
 }));
 
 // Delete a profile
-router.delete('/:profileId',
+router.delete('/',
 requireAuth,
 asyncHandler(async (req, res) => {
-    const profileId  = req.params.profileId * 1;
+    const { profileId } = req.body;
     const profile = await Profile.findByPk(profileId)
     await profile.destroy()
     return res.json(profileId)
@@ -48,9 +61,10 @@ asyncHandler(async (req, res) => {
 // Edit a profile
 router.put('/',
 requireAuth,
+validateProfile,
 asyncHandler(async (req, res) => {
-    const profileId = req.body.profileId
-    const { icon, name } = req.body;
+    const { profileId, icon, name } = req.body;
+    console.log(profileId, icon, name)
     const selectedProfile = await Profile.findByPk(profileId)
     await selectedProfile.update({ icon, name });
     const profile = await Profile.findByPk(profileId)

@@ -9,11 +9,8 @@ function Profiles() {
     const dispatch = useDispatch();
     const [showComponent, setShowComponent] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false);
-    // const [selectedProfileId, setSelectedProfileId] = useState('');
     const user = useSelector(state => state.session?.user);
     const profiles = useSelector(state => Object.values(state.profiles?.allProfiles))
-    console.log(profiles.length)
-
 
     useEffect(() => {
         const fetchProfiles = async () => {
@@ -47,7 +44,7 @@ function Profiles() {
                             </div>
                         </div>
                     ))}
-                {profiles.length < 6 && (
+                {profiles.length < 5 && (
                     <div className="add-profile-button-container">
                         <button className='add-profile-button' onClick={() => setShowComponent(true)}>+</button>
                     </div>

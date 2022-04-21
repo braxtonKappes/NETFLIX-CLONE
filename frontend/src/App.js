@@ -5,7 +5,7 @@ import * as sessionActions from './store/session';
 import Navigation from './components/Navigation/Navigation';
 import Login from './components/Login/Login';
 import BrowseParent from './components/BrowseParent/BrowseParent';
-import ManageProfiles from './components/ManageProfiles/ManageProfiles';
+import ManageProfilesParent from './components/ManageProfilesParent/ManageProfilesParent';
 
 function App() {
   const dispatch = useDispatch();
@@ -27,9 +27,6 @@ function App() {
           <Route exact path='/browse'>
             <BrowseParent />
           </Route>
-          <Route exact path='/signup'>
-
-          </Route>
           <Route exact path='/mychannels'>
 
           </Route>
@@ -37,10 +34,7 @@ function App() {
 
           </Route>
           <Route exact path='/profiles/manage'>
-            <ManageProfiles />
-          </Route>
-          <Route exact path='/profiles/manage/:profileId'>
-
+            <ManageProfilesParent />
           </Route>
         </Switch>
       )}
