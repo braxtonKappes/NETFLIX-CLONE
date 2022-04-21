@@ -5,7 +5,7 @@ import * as sessionActions from './store/session';
 import Navigation from './components/Navigation/Navigation';
 import Login from './components/Login/Login';
 import BrowseParent from './components/BrowseParent/BrowseParent';
-import ManageProfilesParent from './components/ManageProfilesParent/ManageProfilesParent';
+import ManageProfiles from './components/ManageProfiles/ManageProfiles';
 
 function App() {
   const dispatch = useDispatch();
@@ -30,11 +30,8 @@ function App() {
           <Route exact path='/mychannels'>
 
           </Route>
-          <Route  exact path='/mychannels/:channelId'>
-
-          </Route>
           <Route exact path='/profiles/manage'>
-            <ManageProfilesParent />
+            <ManageProfiles />
           </Route>
         </Switch>
       )}
@@ -43,10 +40,3 @@ function App() {
 }
 
 export default App;
-
-/* <button onClick={() => setShowModal(true)}>Modal</button>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <h1>Hello I am a Modal</h1>
-        </Modal>
-      )} */
