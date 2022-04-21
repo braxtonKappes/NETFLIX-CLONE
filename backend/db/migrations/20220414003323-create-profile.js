@@ -15,10 +15,12 @@ module.exports = {
         },
       },
       icon: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       name: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(10)
       },
       createdAt: {
         allowNull: false,

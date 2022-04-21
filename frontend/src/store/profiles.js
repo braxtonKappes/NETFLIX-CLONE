@@ -19,7 +19,7 @@ const loadOne = (profile) => ({
     profile
 })
 
-const addProfile = (profile) => ({
+const createProfile = (profile) => ({
     type: ADD_PROFILE,
     profile
 });
@@ -50,7 +50,9 @@ export const loadAllProfiles = (userId) => async (dispatch) => {
     if (res.ok) {
         const profiles = await res.json();
         dispatch(loadAll(profiles));
+        return profiles;
     }
+    return res;
 }
 
 // Get one profile
@@ -60,20 +62,21 @@ export const loadOneProfile = (profileId) => async (dispatch) => {
         const profile = await res.json();
         dispatch(loadOne(profile))
     }
+    return res;
 }
 
-// Create a profile
-export const createProfile = (data) => async (dispatch) => {
+// Add a profile
+export const addProfile = (data) => async (dispatch) => {
     const res = await csrfFetch(`/api/profiles`, {
         method: `POST`,
         body: JSON.stringify(data)
     });
-
     if (res.ok) {
         const profileData  = await res.json();
-        dispatch(addProfile(profileData.profile));
+        dispatch(createProfile(profileData.profile));
         return profileData;
     }
+    return res;
 }
 
 // Delete a spot
@@ -87,6 +90,7 @@ export const delProfile = (profileId) => async (dispatch) => {
         dispatch(removeProfile(profileId))
         return profileId;
     }
+    return res;
 }
 
 // Edit a profile
@@ -100,6 +104,7 @@ export const putProfile = (data) => async (dispatch) => {
         dispatch(editProfile(updatedProfile))
         return updatedProfile;
     }
+    return res;
 }
 
 // Clear ALL profile state
@@ -148,9 +153,11 @@ const profilesReducer = (state={
         }
         case CLEAR_CURRENT_PROFILE_STATE: {
             newState.currentProfile = {}
+            return newState
         }
-        default:
+        default: {
             return state;
+        }
     }
 }
 

@@ -32,7 +32,7 @@ requireAuth,
 asyncHandler(async (req, res) => {
     const { userId, icon, name } = req.body;
     const profile = await Profile.create({ userId, icon, name });
-    return res.json({ profile })
+    return res.json(profile)
 }));
 
 // Delete a profile

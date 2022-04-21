@@ -5,14 +5,10 @@ import './Navigation.css';
 import NetflixLogo from '../../imgs/netflix-logo-2.svg'
 import { useHistory } from 'react-router-dom';
 
-
-
-
 function Navigation(){
     const history = useHistory()
     const [handleShow, setHandleShow] = useState(false)
     const currentProfile = useSelector(state => state.profiles.currentProfile);
-    const user = useSelector(state => state.session?.user)
 
     const handleOnClickLogo = () => {
         history.push('/')

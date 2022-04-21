@@ -7,7 +7,7 @@ import SignUp from '../SignUp/SignUp';
 
 function Login() {
     const dispatch = useDispatch();
-    const [email, setEmail] = useState("");
+    const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [showSignUpComponent, setShowSignUpComponent] = useState(false)
@@ -15,7 +15,7 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ email, password })).catch(
+        return dispatch(sessionActions.login({ credential, password })).catch(
             async (res) => {
             const data = await res.json();
             if (data && data.errors) setErrors(data.errors);
@@ -38,24 +38,24 @@ function Login() {
                         <ul className={errors.length > 0 ? "errorList" : "hideErrorList"}>
                             {errors.map((error, idx) =>
                             <li key={idx}>
-                                {error}
+                                * {error}
                             </li>
                             )}
                         </ul>
                         <div className="email-input">
                             <input
                             className="email-input"
-                            type="email"
+                            type="text"
                             placeholder='Email or Username'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={credential}
+                            onChange={(e) => setCredential(e.target.value)}
                             required
                             />
                         </div>
                         <div className="password-input">
                             <input
                             className="password-input"
-                            type="text"
+                            type="password"
                             placeholder='Password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}

@@ -12,11 +12,12 @@ function Profiles() {
     // const [selectedProfileId, setSelectedProfileId] = useState('');
     const user = useSelector(state => state.session?.user);
     const profiles = useSelector(state => Object.values(state.profiles?.allProfiles))
+    console.log(profiles.length)
 
 
     useEffect(() => {
         const fetchProfiles = async () => {
-            await dispatch(profileActions.loadAllProfiles(user?.id))
+            await dispatch(profileActions.loadAllProfiles(user.id))
             setIsLoaded(true)
         }
         fetchProfiles();
@@ -46,9 +47,11 @@ function Profiles() {
                             </div>
                         </div>
                     ))}
-                <div className="add-profile-button-container">
-                    <button className='add-profile-button' onClick={() => setShowComponent(true)}>+</button>
-                </div>
+                {profiles.length < 6 && (
+                    <div className="add-profile-button-container">
+                        <button className='add-profile-button' onClick={() => setShowComponent(true)}>+</button>
+                    </div>
+                )}
                 </div>
                 <Link to={'/profiles/manage'} className="manage-profiles-button">Manage Profiles</Link>
             </div>

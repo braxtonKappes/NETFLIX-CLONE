@@ -20,7 +20,7 @@ function DemoUser() {
     return (
         <div>
             <div onClick={demoUserLogin} id='' className="demoUserButton">
-                <img src={DemoUser_profile_icon} />.
+                <img alt="demo_user_profile_icon" src={DemoUser_profile_icon} />.
                 <h2>Demo User</h2>
             </div>
         </div>

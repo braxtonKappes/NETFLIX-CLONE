@@ -21,26 +21,115 @@
     bottom: 0;
 }
 
-.list-profiles{
+.add-profile-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     color: #fff;
     font-size: 3.5vw;
     font-weight: unset;
 }
 
-.choose-profile{
-margin: 2em 0;
+.add-profile-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.whos-watching{
+.choose-profile-icon{
+
+}
+
+.add-profile-title{
     text-align: center;
     display: block;
-    font-size: 3rem;
+    font-size: 4rem;
     margin-block-start: 0.67em;
     margin-block-end: 0.67em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
     font-weight: bold;
+}
+
+.add-profile-subtitle{
+    text-align: center;
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+}
+
+.add-profile-icon{
+    background-color: #333;
+    background-repeat: no-repeat no-repeat;
+    background-size: cover;
+    border-color: #e5e5e5;
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    height: 10vw;
+    line-height: 17.28px;
+    max-height: 200px;
+    max-width: 200px;
+    min-height: 84px;
+    min-width: 84px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    width: 10vw;
+    margin-right: 30px;
+}
+
+.add-profile-icon:hover{
+    border: 3px solid #ffffff;
+}
+
+.add-profile-icon:checked + .selected-profile-icon{
+    display: block;
+}
+
+.selected-profile-icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: none;
+}
+
+.add-profile-icon::after{
+    border: .3rem solid #e5e5e5;
+    border-radius: 4px;
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.add-profile-name{
+    appearance: none;
+    border: 1px solid #8c8c8c;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: #000;
+    cursor: text;
+    display: block;
+    font-family: "Netflix Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    height: 70px;
+    line-height: normal;
+    list-style: none;
+    margin: 1px 0 0 0;
+    min-width: 500px;
+    padding: 10px 10px 0;
+    width: auto;
 }
 
 .add-profile-buttons{

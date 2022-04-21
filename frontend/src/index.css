@@ -16,3 +16,18 @@ a{
 .app{
     background-color: #111;
 }
+
+.errorList {
+    display: flex;
+    color: red;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 2px;
+    margin: 10px 0;
+    background-color: rgb(0, 0, 0);
+}
+
+.hideErrorList {
+    display: none;
+}
