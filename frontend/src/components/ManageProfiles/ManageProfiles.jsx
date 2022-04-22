@@ -10,21 +10,25 @@ function ManageProfiles() {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
     const [showProfileToEdit, setShowProfileToEdit] = useState(false)
-    const user = useSelector(state => state.session?.user);
-    const profiles = useSelector(state => Object.values(state.profiles?.allProfiles))
+    const session = useSelector(state => state.session);
+    const userId = session.user.id
+    const profiles = useSelector(state => state.profiles)
+    const allProfiles = profiles.allProfiles
+    const userProfiles = Object.values(profiles.allProfiles)
     const editProfile = useSelector(state => state.profiles?.editProfile)
 
     useEffect(() => {
         const fetchProfiles = async () => {
-            await dispatch(profileActions.loadAllProfiles(user.id))
+            await dispatch(profileActions.loadAllProfiles(userId))
             setIsLoaded(true)
         }
         fetchProfiles();
-    }, [dispatch, user.id]);
+    }, [dispatch, allProfiles]);
 
     const handleOnClick = () => {
         setShowProfileToEdit(true)
     }
+
 
     if (Object.keys(editProfile).length && showProfileToEdit) {
         return (
@@ -36,7 +40,7 @@ function ManageProfiles() {
                 <div className="manage-profiles-content">
                 <h1 className="manage-profiles-title">Manage Profiles</h1>
                 <div className="manage-profiles">
-                    {profiles?.map(profile => (
+                    {userProfiles.map(profile => (
                         <div key={profile.id} className="manage-profile">
                             <div className="manage-profile-icon-container">
                                 <img

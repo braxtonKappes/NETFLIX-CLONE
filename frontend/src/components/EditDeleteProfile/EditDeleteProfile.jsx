@@ -4,8 +4,10 @@ import * as profileActions from '../../store/profiles'
 import { useDispatch, useSelector } from 'react-redux'
 import edit_pencil_icon from '../../imgs/edit-pencil.svg'
 import EditProfileIcons from '../EditProfileIcons/EditProfileIcons'
+import { useHistory } from 'react-router-dom'
 
 function EditDeleteProfile({setShowProfileToEdit}) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [showEditProfileIcons, setShowEditProfileIcons] = useState(false)
     const [errors, setErrors] = useState([]);
@@ -13,11 +15,16 @@ function EditDeleteProfile({setShowProfileToEdit}) {
     const editProfile = useSelector(state => state.profiles?.editProfile)
     const [profileName, setProfileName] = useState(editProfile.name);
     const [profileIcon, setProfileIcon] = useState(editProfile.icon);
+    const profiles = useSelector(state => state.profiles)
+    const allProfiles = profiles.allProfiles
 
     const handleOnClickDelete = async (e) => {
         e.preventDefault();
 
-        await dispatch(profileActions.delProfile(editProfile.id));
+        if (Object.keys(allProfiles).length === 1) {
+            await dispatch(profileActions.delProfile(editProfile.id))
+            .then(history.push('/browse'));
+        } else await dispatch(profileActions.delProfile(editProfile.id));
         setShowProfileToEdit(false)
     }
 
@@ -67,7 +74,7 @@ function EditDeleteProfile({setShowProfileToEdit}) {
                             </li>)}
                         </ul>
                         <div className="edit-profile-avatar-container">
-                            <img className='edit-delete-pencil-icon' src={edit_pencil_icon} onClick={handleChooseProfileIconToggle} alt="edit-pencil-icon" />
+                            {/* <img className='edit-delete-pencil-icon' src={edit_pencil_icon} onClick={handleChooseProfileIconToggle} alt="edit-pencil-icon" /> */}
                             <img className="edit-profile-avatar" src={editProfile.icon} alt="profile-avatar"  />
                         </div>
                         <input

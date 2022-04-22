@@ -15,7 +15,6 @@ function Login() {
     const [errors, setErrors] = useState([]);
     const [showSignUpComponent, setShowSignUpComponent] = useState(false)
     const session = useSelector(state => state.session);
-    const userId = session.user.id
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -29,8 +28,8 @@ function Login() {
         }
 
         return dispatch(sessionActions.login(user))
-        .then(profileActions.loadAllProfiles(userId))
-        .then(history.push('/browse'))
+        .then((user) => profileActions.loadAllProfiles(user.id))
+        .then(() => history.push('/browse'))
         .catch(
             async (res) => {
             const data = await res.json();

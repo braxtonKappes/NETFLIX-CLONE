@@ -56,9 +56,7 @@ export const loadAllProfiles = (userId) => async (dispatch) => {
     if (res.ok) {
         const profiles = await res.json();
         dispatch(loadAll(profiles));
-        return profiles;
     }
-    return res;
 }
 
 // Get one profile
@@ -68,7 +66,6 @@ export const loadOneProfile = (profileId) => async (dispatch) => {
         const profile = await res.json();
         dispatch(loadOne(profile))
     }
-    return res;
 }
 
 // Get one profile to edit
@@ -78,7 +75,6 @@ export const loadOneProfileToEdit = (profileId) => async (dispatch) => {
         const profile = await res.json();
         dispatch(loadOneToEdit(profile))
     }
-    return res;
 }
 
 // Add a profile
@@ -92,7 +88,6 @@ export const addProfile = (data) => async (dispatch) => {
         dispatch(createProfile(profileData));
         return profileData;
     }
-    return res;
 }
 
 // Delete a profile
@@ -106,7 +101,6 @@ export const delProfile = (profileId) => async (dispatch) => {
         dispatch(removeProfile(profileId))
         return profileId;
     }
-    return res;
 }
 
 // Edit a profile
@@ -120,7 +114,6 @@ export const editProfile = (data) => async (dispatch) => {
         dispatch(editAProfile(updatedProfile))
         return updatedProfile;
     }
-    return res;
 }
 
 // Clear ALL profile state

@@ -52,7 +52,9 @@ function Profiles() {
                     </div>
                 )}
                 </div>
-                <Link to={'/profiles/manage'} className="manage-profiles-button">Manage Profiles</Link>
+                {Object.keys(profiles.allProfiles).length > 0 && (
+                    <Link to={'/profiles/manage'} className="manage-profiles-button">Manage Profiles</Link>
+                )}
             </div>
         )
     }

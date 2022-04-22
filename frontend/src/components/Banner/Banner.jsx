@@ -4,7 +4,7 @@ import axios from '../../axios';
 import requests from '../../requests';
 import { Link } from 'react-router-dom';
 
-function Banner() {
+function Banner({currentProfileId}) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [movie, setMovie] = useState([]);
 
@@ -32,7 +32,7 @@ function Banner() {
                 <h1 className="banner-title">{movie?.title || movie?.name || movie?.original_name}</h1>
                 <div className="banner-buttons">
                     {/* <button className="banner-button">Play</button> */}
-                    <Link to={'/mychannels'} className="banner-button">My Channels</Link>
+                    <Link to={`/mychannels/${currentProfileId}`} className="banner-button">My Notes</Link>
                 </div>
                 <h1 className="banner-description">
                     {truncate(movie?.overview, 150)}

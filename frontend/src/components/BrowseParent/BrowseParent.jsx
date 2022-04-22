@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import Banner from '../Banner/Banner'
 import MovieRows from '../MovieRows/MovieRows'
 import Profiles from '../Profiles/Profiles'
 
 function BrowseParent() {
-    const profile = useSelector(state => state.profiles.currentProfile);
+    const profiles = useSelector(state => state.profiles);
+    const currentProfile = profiles.currentProfile;
+    const currentProfileId = profiles.currentProfile.id;
 
-    if (Object.keys(profile).length) {
+    if (Object.keys(currentProfile).length) {
         return (
             <>
-                <Banner />
+                <Banner currentProfileId={currentProfileId}/>
                 <MovieRows />
             </>
         )

@@ -1,6 +1,7 @@
 import './Row.css';
 import React, { useEffect, useState } from 'react';
 import axios from '../../axios';
+import ErrorImg from '../../imgs/No-Image-Found.png'
 
 function Row({title, fetchUrl, isLargeRow}) {
     const [isLoaded, setIsLoaded] = useState(false)
@@ -27,6 +28,7 @@ function Row({title, fetchUrl, isLargeRow}) {
                         className={`row-poster ${isLargeRow && "row-posterLarge"}`}
                         src={`${baseURL}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
                         alt={movie.name}
+                        onError={(e) => (e.target.onerror = null, e.target.src=ErrorImg)}
                     />
                     {/* <div className="add-to-channel" /> */}
                 </div>

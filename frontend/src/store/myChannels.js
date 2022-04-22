@@ -10,17 +10,17 @@ const CLEAR_CHANNELS_STATE = 'channels/CLEAR_CHANNELS_STATE'
 const CLEAR_CURRENT_CHANNEL_STATE = 'channels/CLEAR_CURRENT_CHANNEL_STATE'
 
 // actions
-const loadAll = (channels) => ({
+const load_All_Channels = (channels) => ({
     type: LOAD_ALL_CHANNELS,
     channels
 });
 
-const loadOne = (channel) => ({
+const load_One_Channel = (channel) => ({
     type: LOAD_ONE_CHANNEL,
     channel
 });
 
-const loadOneToEdit = (channel) => ({
+const loadOneToEditChannel = (channel) => ({
     type: LOAD_ONE_CHANNEL_TO_EDIT,
     channel
 });
@@ -51,12 +51,10 @@ const clearCurrentChannelStateAction = () => ({
 /* thunks */
 // Get all channels and movies
 export const loadAllChannels = (profileId) => async (dispatch) => {
-    console.log('THIS IS CHANNELS!!!!!!!!',profileId)
     const res = await csrfFetch(`/api/channels/all/${profileId}`)
-
     if (res.ok) {
         const channels = await res.json();
-        dispatch(loadAll(channels));
+        dispatch(load_All_Channels(channels));
         return channels;
     }
     return res;
@@ -67,7 +65,7 @@ export const loadOneChannel = (channelId) => async (dispatch) => {
     const res = await csrfFetch(`/api/channels/one/${channelId}`);
     if (res.ok) {
         const channel = await res.json();
-        dispatch(loadOne(channel))
+        dispatch(load_One_Channel(channel))
     }
     return res;
 }
@@ -77,7 +75,7 @@ export const loadOneChannelToEdit = (channelId) => async (dispatch) => {
     const res = await csrfFetch(`/api/channels/one/${channelId}`);
     if (res.ok) {
         const channel = await res.json();
-        dispatch(loadOneToEdit(channel))
+        dispatch(loadOneToEditChannel(channel))
     }
     return res;
 }

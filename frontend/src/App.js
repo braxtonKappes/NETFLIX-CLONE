@@ -13,10 +13,12 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const session = useSelector(state => state.session);
   const user = session.user
+  const userId = user.id
 
   useEffect(() => {
-      dispatch(sessionActions.restoreUser()).then(setIsLoaded(true));
-  }, [dispatch]);
+      dispatch(sessionActions.restoreUser())
+      .then(() => setIsLoaded(true))
+  }, [dispatch, userId]);
 
   return (
     <div className='app'>
@@ -29,7 +31,10 @@ function App() {
           <Route exact path='/browse'>
             <BrowseParent />
           </Route>
-          <Route exact path='/mychannels'>
+          {/* <Route exact path='/mychannels/:profileId'>
+            <MyChannels />
+          </Route> */}
+          <Route exact path='/mynotes'>
             <MyChannels />
           </Route>
           <Route exact path='/profiles/manage'>

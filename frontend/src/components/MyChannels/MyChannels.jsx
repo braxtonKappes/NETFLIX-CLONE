@@ -2,14 +2,16 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './MyChannels.css'
 import * as myChannelsActions from '../../store/myChannels'
+import { useParams } from 'react-router-dom'
 
 function MyChannels() {
+    const { profileId } = useParams();
     const dispatch = useDispatch();
-    const profileId = useSelector(state => state.profiles.currentProfile?.id)
+    const session = useSelector(state => state.session);
+    const userId = session.user.id
 
     useEffect(() => {
-        dispatch(myChannelsActions.loadAllChannels(profileId))
-
+        dispatch(myChannelsActions.loadAllChannels(profileId));
     }, [dispatch, profileId])
 
     return (

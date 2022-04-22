@@ -14,7 +14,7 @@ const validateProfile = [
     check('name')
         .exists({ checkFalsy: true })
         .isLength({ min: 1, max: 10 })
-        .withMessage('Please provide a valid profile name.'),
+        .withMessage('Please provide a profile name between 1-10 characters.'),
     handleValidationErrors,
 ];
 

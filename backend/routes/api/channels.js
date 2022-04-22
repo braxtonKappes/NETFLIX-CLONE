@@ -21,27 +21,34 @@ const validateChannel = [
 // Get all channels
 router.get('/all/:profileId',
 asyncHandler(async(req, res) => {
-    const paramId = req.params.userId * 1;
+    const profileId = req.params.profileId;
     const channels = await Channel.findAll({
         where: {
-            profileId: paramId
+            profileId
         },
+        // include: {
+        //     model: Movie,
+        //     // as: 'movies',
+        //     through: {
+        //         attributes: []
+        //     }
+        // }
     })
-    console.log('THIS IS CHANNELS!!!!!!!!',channels)
-    const channelMovies = {};
-    channels.forEach( async channel => {
-        const moviesAndChannels = await Channel_Movie.findAll({
-            where: {
-                channelId: channel.id
-            }
-        })
-        const movies = moviesAndChannels.map( async channelMovie => {
-            const movie = await Movie.findByPk(channelMovie.movieId);
-            return movie;
-        })
-        channelMovies[channel.id] = {channel, movies}
-    })
-    return res.json(channelMovies)
+    console.log('\n\n\n',channels, '\n\n\n' )
+    // const channelMovies = {};
+    // channels.forEach( async channel => {
+    //     const moviesAndChannels = await Channel_Movie.findAll({
+    //         where: {
+    //             channelId: channel.id
+    //         }
+    //     })
+    //     const movies = moviesAndChannels.map( async channelMovie => {
+    //         const movie = await Movie.findByPk(channelMovie.movieId);
+    //         return movie;
+    //     })
+    //     channelMovies[channel.id] = {channel, movies}
+    // })
+    return res.json(channels)
 }));
 
 // Getting one channel
