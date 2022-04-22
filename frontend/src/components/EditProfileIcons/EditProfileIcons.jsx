@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 import './EditProfileIcons.css'
 
 function EditProfileIcon({setShowEditProfileIcons}) {
-    
+
 
     return (
         <div className='epi-wrapper'>

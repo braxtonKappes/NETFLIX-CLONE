@@ -14,16 +14,19 @@ function SignUp({setShowSignUpComponent}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
         if (password === confirmPassword) {
             setErrors([]);
             const newUsername = username.toLowerCase();
             const newEmail = email.toLowerCase();
-            const data = {
+
+            const signUpData = {
                 email: newEmail,
                 username: newUsername,
                 password: password,
             }
-            return dispatch(sessionActions.signup(data))
+            return dispatch(sessionActions.signup(signUpData))
+            .then(setShowSignUpComponent(false))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);

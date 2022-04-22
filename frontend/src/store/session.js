@@ -4,9 +4,9 @@ const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
 // actions
-const setUser = (newUser) => ({
+const setUser = (user) => ({
   type: SET_USER,
-  newUser
+  user
 });
 
 const removeUser = () => ({
@@ -14,10 +14,10 @@ const removeUser = () => ({
 });
 
 // Login user
-export const login = ({ credential, password }) => async dispatch => {
+export const login = (user) => async dispatch => {
   const response = await csrfFetch("/api/session", {
     method: "POST",
-    body: JSON.stringify({ credential, password }),
+    body: JSON.stringify(user),
   });
   const data = await response.json();
   dispatch(setUser(data));
@@ -28,7 +28,7 @@ export const login = ({ credential, password }) => async dispatch => {
 export const restoreUser = () => async dispatch => {
   const response = await csrfFetch("/api/session");
   const data = await response.json();
-  dispatch(setUser(data.user));
+  dispatch(setUser(data));
   return response;
 };
 
@@ -63,10 +63,10 @@ function reducer(state={
   let newState = {...state};
   switch (action.type) {
       case SET_USER:
-        newState.user = action.newUser;
+        newState.user = action.user;
         return newState;
       case REMOVE_USER:
-        newState = Object.assign({}, state, { user: null });
+        newState = {user: {}};
         return newState;
       default:
         return state;

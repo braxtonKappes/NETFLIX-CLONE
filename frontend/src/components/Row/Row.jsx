@@ -22,14 +22,14 @@ function Row({title, fetchUrl, isLargeRow}) {
             <h2 className="row-title">{ title }</h2>
             <div className="row-posters">
                 {movies.map(movie => (
-                <>
+                <div key={movie.id}>
                     <img
-                        key={movie.id} className={`row-poster ${isLargeRow && "row-posterLarge"}`}
+                        className={`row-poster ${isLargeRow && "row-posterLarge"}`}
                         src={`${baseURL}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
                         alt={movie.name}
                     />
-                    <div className="add-to-channel" />
-                </>
+                    {/* <div className="add-to-channel" /> */}
+                </div>
                 ))}
             </div>
             {/* container -> posters */}

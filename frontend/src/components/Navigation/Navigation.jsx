@@ -28,7 +28,7 @@ function Navigation(){
 return (
     <div className={`nav-bar ${handleShow && 'nav-bar-black'}`}>
         <img onClick={handleOnClickLogo} className='netflix-logo' alt='NetFlixLogo' src={NetflixLogo} />
-        {Object.keys(currentProfile).length && (
+        {Object.keys(currentProfile).length > 0 && (
             <div className="nav-profile-icon">
                 <ProfileButton currentProfile={currentProfile} />
             </div>

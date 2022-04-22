@@ -1,22 +1,37 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from "../../store/session";
+import * as profileActions from '../../store/profiles'
 import './Login.css'
 import DemoUser from '../DemoUser/index'
 import SignUp from '../SignUp/SignUp';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [showSignUpComponent, setShowSignUpComponent] = useState(false)
+    const session = useSelector(state => state.session);
+    const userId = session.user.id
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
+
         const credentialLowerCased = credential.toLowerCase();
-        return dispatch(sessionActions.login({ credentialLowerCased, password })).catch(
+
+        const user = {
+            credential: credentialLowerCased,
+            password: password
+        }
+
+        return dispatch(sessionActions.login(user))
+        .then(profileActions.loadAllProfiles(userId))
+        .then(history.push('/browse'))
+        .catch(
             async (res) => {
             const data = await res.json();
             if (data && data.errors) setErrors(data.errors);

@@ -6,14 +6,16 @@ import Navigation from './components/Navigation/Navigation';
 import Login from './components/Login/Login';
 import BrowseParent from './components/BrowseParent/BrowseParent';
 import ManageProfiles from './components/ManageProfiles/ManageProfiles';
+import MyChannels from './components/MyChannels/MyChannels';
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const user = useSelector(state => state.session?.user);
+  const session = useSelector(state => state.session);
+  const user = session.user
 
   useEffect(() => {
-      dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+      dispatch(sessionActions.restoreUser()).then(setIsLoaded(true));
   }, [dispatch]);
 
   return (
@@ -22,13 +24,13 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path='/'>
-            { user ?  <Redirect to={'/browse'} /> : <Login /> }
+            { Object.keys(user).length ? <Redirect to={'/browse'} /> : <Login /> }
           </Route>
           <Route exact path='/browse'>
             <BrowseParent />
           </Route>
           <Route exact path='/mychannels'>
-
+            <MyChannels />
           </Route>
           <Route exact path='/profiles/manage'>
             <ManageProfiles />

@@ -1,74 +1,97 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
-const { Channel, User, Profile, Movie } = require('../../db/models');
+const { Channel, User, Profile, Movie, Channel_Movie } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-const validateProfile = [
+const validateChannel = [
     check('icon')
         .exists({ checkFalsy: true })
         .notEmpty()
-        .withMessage('Please select a profile icon.'),
+        .withMessage('Please select a channel icon.'),
     check('name')
         .exists({ checkFalsy: true })
         .isLength({ min: 1, max: 10 })
-        .withMessage('Please provide a valid profile name.'),
+        .withMessage('Please provide a valid channel name.'),
     handleValidationErrors,
 ];
 
-// Get all profiles
-router.get('/all/:userId',
+// Get all channels
+router.get('/all/:profileId',
 asyncHandler(async(req, res) => {
     const paramId = req.params.userId * 1;
-    const profiles = await Profile.findAll({
+    const channels = await Channel.findAll({
         where: {
-            userId: paramId
-        }
+            profileId: paramId
+        },
     })
-    return res.json(profiles)
+    console.log('THIS IS CHANNELS!!!!!!!!',channels)
+    const channelMovies = {};
+    channels.forEach( async channel => {
+        const moviesAndChannels = await Channel_Movie.findAll({
+            where: {
+                channelId: channel.id
+            }
+        })
+        const movies = moviesAndChannels.map( async channelMovie => {
+            const movie = await Movie.findByPk(channelMovie.movieId);
+            return movie;
+        })
+        channelMovies[channel.id] = {channel, movies}
+    })
+    return res.json(channelMovies)
 }));
 
-// Getting one profile
-router.get('/one/:profileId',
+// Getting one channel
+router.get('/one/:channelId',
 asyncHandler(async(req, res) => {
-    const profileId = req.params.profileId * 1;
-    const profile = await Profile.findByPk(profileId)
-    return res.json(profile)
+    const channelId = req.params.channelId * 1;
+    const channel = await Channel.findByPk(channelId)
+    return res.json(channel)
 }));
 
-// Add a profile
+// Add a channel
 router.post('/',
 requireAuth,
-validateProfile,
+validateChannel,
 asyncHandler(async (req, res) => {
     const { userId, icon, name } = req.body;
-    const profile = await Profile.create({ userId, icon, name });
-    return res.json(profile)
+    const channel = await Channel.create({ userId, icon, name });
+    return res.json(channel)
 }));
 
-// Delete a profile
+// Add a movie to a channel
+router.post('/movieToChannel',
+requireAuth,
+validateChannel,
+asyncHandler(async (req, res) => {
+    const { channelId, movieId } = req.body;
+    const channel = await Channel.create({ userId, icon, name });
+    return res.json(channel)
+}));
+
+// Delete a channel
 router.delete('/',
 requireAuth,
 asyncHandler(async (req, res) => {
-    const { profileId } = req.body;
-    const profile = await Profile.findByPk(profileId)
-    await profile.destroy()
-    return res.json(profileId)
+    const { channelId } = req.body;
+    const channel = await Channel.findByPk(channelId)
+    await channel.destroy()
+    return res.json(channelId)
 }));
 
-// Edit a profile
+// Edit a channel
 router.put('/',
 requireAuth,
-validateProfile,
+validateChannel,
 asyncHandler(async (req, res) => {
-    const { profileId, icon, name } = req.body;
-    console.log(profileId, icon, name)
-    const selectedProfile = await Profile.findByPk(profileId)
-    await selectedProfile.update({ icon, name });
-    const profile = await Profile.findByPk(profileId)
-    return res.json(profile)
+    const { channelId, icon, name } = req.body;
+    const selectedChannel = await Channel.findByPk(channelId)
+    await selectedChannel.update({ icon, name });
+    const channel = await Channel.findByPk(channelId)
+    return res.json(channel)
 }))
 
 module.exports = router;

@@ -1,27 +1,27 @@
 import { csrfFetch } from "./csrf.js";
 
-const LOAD_ALL = 'channels/LOAD_ALL';
-const LOAD_ONE = 'channels/LOAD_ONE';
-const LOAD_ONE_EDIT = 'channels/LOAD_ONE_EDIT'
+const LOAD_ALL_CHANNELS = 'channels/LOAD_ALL_CHANNELS';
+const LOAD_ONE_CHANNEL = 'channels/LOAD_ONE_CHANNEL';
+const LOAD_ONE_CHANNEL_TO_EDIT = 'channels/LOAD_ONE_CHANNEL_TO_EDIT'
 const ADD_CHANNEL = 'channels/ADD_CHANNEL'
 const REMOVE_CHANNEL = 'channels/REMOVE_CHANNEL'
 const EDIT_CHANNEL = 'channels/EDIT_CHANNEL'
-const CLEAR_CHANNELS_STATE = '/channels/CLEAR_CHANNELS_STATE'
-const CLEAR_CURRENT_CHANNEL_STATE = '/channels/CLEAR_CURRENT_CHANNEL_STATE'
+const CLEAR_CHANNELS_STATE = 'channels/CLEAR_CHANNELS_STATE'
+const CLEAR_CURRENT_CHANNEL_STATE = 'channels/CLEAR_CURRENT_CHANNEL_STATE'
 
 // actions
 const loadAll = (channels) => ({
-    type: LOAD_ALL,
+    type: LOAD_ALL_CHANNELS,
     channels
 });
 
 const loadOne = (channel) => ({
-    type: LOAD_ONE,
+    type: LOAD_ONE_CHANNEL,
     channel
 });
 
 const loadOneToEdit = (channel) => ({
-    type: LOAD_ONE_EDIT,
+    type: LOAD_ONE_CHANNEL_TO_EDIT,
     channel
 });
 
@@ -49,9 +49,10 @@ const clearCurrentChannelStateAction = () => ({
 })
 
 /* thunks */
-// Get all channels
-export const loadAllChannels = (userId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/channels/all/${userId}`)
+// Get all channels and movies
+export const loadAllChannels = (profileId) => async (dispatch) => {
+    console.log('THIS IS CHANNELS!!!!!!!!',profileId)
+    const res = await csrfFetch(`/api/channels/all/${profileId}`)
 
     if (res.ok) {
         const channels = await res.json();
@@ -141,17 +142,17 @@ const channelsReducer = (state={
     }, action) => {
     let newState = {...state};
     switch (action.type) {
-        case LOAD_ALL: {
+        case LOAD_ALL_CHANNELS: {
             action.channels.forEach(channel => {
                 newState.allChannels[channel.id] = channel;
             });
             return newState;
         }
-        case LOAD_ONE_EDIT: {
+        case LOAD_ONE_CHANNEL_TO_EDIT: {
             newState.editChannel = action.channel
             return newState;
         }
-        case LOAD_ONE: {
+        case LOAD_ONE_CHANNEL: {
             newState.currentChannel = action.channel
             return newState;
         }

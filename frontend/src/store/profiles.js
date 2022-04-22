@@ -1,27 +1,27 @@
 import { csrfFetch } from "./csrf.js";
 
-const LOAD_ALL = 'profiles/LOAD_ALL';
-const LOAD_ONE = 'profiles/LOAD_ONE';
-const LOAD_ONE_EDIT = 'profiles/LOAD_ONE_EDIT'
+const LOAD_ALL_PROFILES = 'profiles/LOAD_ALL_PROFILES';
+const LOAD_ONE_PROFILE = 'profiles/LOAD_ONE_PROFILE';
+const LOAD_ONE_PROFILE_TO_EDIT = 'profiles/LOAD_ONE_PROFILE_TO_EDIT'
 const ADD_PROFILE = 'profiles/ADD_PROFILE'
 const REMOVE_PROFILE = 'profiles/REMOVE_PROFILE'
 const EDIT_PROFILE = 'profiles/EDIT_PROFILE'
-const CLEAR_PROFILES_STATE = '/profiles/CLEAR_PROFILES_STATE'
-const CLEAR_CURRENT_PROFILE_STATE = '/profiles/CLEAR_CURRENT_PROFILE_STATE'
+const CLEAR_PROFILES_STATE = 'profiles/CLEAR_PROFILES_STATE'
+const CLEAR_CURRENT_PROFILE_STATE = 'profiles/CLEAR_CURRENT_PROFILE_STATE'
 
 // actions
 const loadAll = (profiles) => ({
-    type: LOAD_ALL,
+    type: LOAD_ALL_PROFILES,
     profiles
 })
 
 const loadOne = (profile) => ({
-    type: LOAD_ONE,
+    type: LOAD_ONE_PROFILE,
     profile
 })
 
 const loadOneToEdit = (profile) => ({
-    type: LOAD_ONE_EDIT,
+    type: LOAD_ONE_PROFILE_TO_EDIT,
     profile
 })
 
@@ -141,17 +141,17 @@ const profilesReducer = (state={
     }, action) => {
     let newState = {...state};
     switch (action.type) {
-        case LOAD_ALL: {
+        case LOAD_ALL_PROFILES: {
             action.profiles.forEach(profile => {
                 newState.allProfiles[profile.id] = profile;
             });
             return newState;
         }
-        case LOAD_ONE_EDIT: {
+        case LOAD_ONE_PROFILE_TO_EDIT: {
             newState.editProfile = action.profile
             return newState;
         }
-        case LOAD_ONE: {
+        case LOAD_ONE_PROFILE: {
             newState.currentProfile = action.profile
             return newState;
         }

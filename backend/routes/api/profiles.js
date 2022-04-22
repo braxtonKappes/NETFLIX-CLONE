@@ -64,7 +64,6 @@ requireAuth,
 validateProfile,
 asyncHandler(async (req, res) => {
     const { profileId, icon, name } = req.body;
-    console.log(profileId, icon, name)
     const selectedProfile = await Profile.findByPk(profileId)
     await selectedProfile.update({ icon, name });
     const profile = await Profile.findByPk(profileId)

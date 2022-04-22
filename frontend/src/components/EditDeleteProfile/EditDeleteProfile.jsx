@@ -52,7 +52,7 @@ function EditDeleteProfile({setShowProfileToEdit}) {
 
     if (Object.keys(editProfile).length && showEditProfileIcons) {
         return (
-            <EditProfileIcons setShowEditProfileIcons={setShowEditProfileIcons} />
+            <EditProfileIcons setProfileIcon={setProfileIcon} setShowEditProfileIcons={setShowEditProfileIcons} />
         )
     } else {
         return (

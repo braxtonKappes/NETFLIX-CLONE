@@ -9,19 +9,21 @@ function Profiles() {
     const dispatch = useDispatch();
     const [showComponent, setShowComponent] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false);
-    const user = useSelector(state => state.session?.user);
-    const profiles = useSelector(state => Object.values(state.profiles?.allProfiles))
+    const session = useSelector(state => state.session);
+    const userId = session.user.id
+    const profiles = useSelector(state => state.profiles)
+    const allProfiles = Object.values(profiles.allProfiles)
 
     useEffect(() => {
         const fetchProfiles = async () => {
-            await dispatch(profileActions.loadAllProfiles(user.id))
-            setIsLoaded(true)
+        await dispatch(profileActions.loadAllProfiles(userId))
+        setIsLoaded(true)
         }
         fetchProfiles();
-    }, [dispatch, user.id]);
+    }, [dispatch, userId]);
 
-    if (showComponent) {
-        return isLoaded && (
+    if (isLoaded && showComponent) {
+        return (
             <AddProfile setShowComponent={setShowComponent}/>
         )
     } else {
@@ -29,7 +31,7 @@ function Profiles() {
             <div className="profiles-wrapper">
                 <h1 className="whos-watching">Who's watching?</h1>
                 <div className="choose-profile">
-                    {profiles?.map(profile => (
+                    {allProfiles?.map(profile => (
                         <div key={profile.id} className="profile">
                             <div className="icon-container">
                                 <img
@@ -44,7 +46,7 @@ function Profiles() {
                             </div>
                         </div>
                     ))}
-                {profiles.length < 5 && (
+                {allProfiles.length < 5 && (
                     <div className="add-profile-button-container">
                         <button className='add-profile-button' onClick={() => setShowComponent(true)}>+</button>
                     </div>
