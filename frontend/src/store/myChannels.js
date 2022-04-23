@@ -153,6 +153,18 @@ const channelsReducer = (state={
             newState.currentChannel = action.channel
             return newState;
         }
+        case ADD_CHANNEL: {
+            newState.allChannels[action.channel.id] = action.channel
+            return newState;
+        }
+        case EDIT_CHANNEL: {
+            newState.allChannels[action.updatedChannel.id] = action.updatedChannel
+            return newState;
+        }
+        case REMOVE_CHANNEL: {
+            delete newState.allChannels[action.channelId]
+            return newState;
+        }
         case CLEAR_CHANNELS_STATE: {
             newState.allChannels = {}
             newState.currentChannel = {}

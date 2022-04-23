@@ -41,17 +41,16 @@ function ManageProfiles() {
                 <div className="manage-profiles-content">
                     <div className="manage-profiles">
                         {Object.values(allProfiles).map(profile => (
-                            <div key={profile.id} className="manage-profile">
+                            <div className="manage-profile" onClick={() => dispatch(profileActions.loadOneProfileToEdit(profile.id)).then(handleOnClick)} key={profile.id}>
                                 <div className="manage-profile-icon-container">
                                     <img
-                                    onClick={() => dispatch(profileActions.loadOneProfileToEdit(profile.id)).then(handleOnClick)}
-                                    className='edit-pencil-icon'
-                                    src={edit_pencil_icon}
-                                    alt="edit-pencil-icon" />
+                                        className='edit-pencil-icon'
+                                        src={edit_pencil_icon}
+                                        alt="edit-pencil-icon" />
                                     <img
+                                        className="manage-profile-icon"
                                         src={profile.icon}
                                         alt="profile-icon"
-                                        className="manage-profile-icon"
                                     />
                                 </div>
                                 <div className="profile-name-container">

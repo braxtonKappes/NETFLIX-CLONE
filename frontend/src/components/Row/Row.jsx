@@ -4,14 +4,16 @@ import axios from '../../axios';
 import ErrorImg from '../../imgs/No-Image-Found.png'
 import { useDispatch, useSelector } from 'react-redux';
 import * as channelActions from '../../store/myChannels'
+import { Link, useHistory } from 'react-router-dom';
 
 function Row({title, fetchUrl, isLargeRow}) {
     const dispatch = useDispatch();
-    const [note, setNote] = useState('');
+    // const [showCheckMark, setShowCheckMark] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false)
     const [movies, setMovies] = useState([]);
     const profiles = useSelector(state => state.profiles)
     const profileId = profiles.currentProfile.id
+
 
     const baseURL = "https://image.tmdb.org/t/p/original/"
 
@@ -38,8 +40,16 @@ function Row({title, fetchUrl, isLargeRow}) {
                         onError={(e) => (e.target.onerror = null, e.target.src=ErrorImg)}
                     />
                     <div className="hidden-div">
-                        <button onClick={() => setNote(`${movie.name}, is a movie/show I need to watch!`).then(() => dispatch(channelActions.addChannel({profileId, note})))} className='add-movie-btn'>+</button>
-                        <h3 className="add-to-movies-text">Add to notes?</h3>
+                        {/* {(
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                            </svg>
+                        )} */}
+                        {/* {(
+                            <button onClick={() => dispatch(channelActions.addChannel({profileId: profileId, name: `${movie.name}, is a movie/show I need to watch!`}))} className='add-movie-btn'>+</button>
+                        )} */}
+                        <Link className="add-to-movies-text" to={`/mynotes/${profileId}`} onClick={() => dispatch(channelActions.addChannel({profileId: profileId, name: `${movie.name}, is a movie/show I need to watch!`}))} >Add to notes?</Link>
                     </div>
                 </div>
                 ))}

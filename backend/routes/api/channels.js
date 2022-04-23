@@ -9,8 +9,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 const validateChannel = [
     check('name')
         .exists({ checkFalsy: true })
-        .notEmpty()
-        .isLength({ min: 1, max: 250 })
+        .isLength({ max: 250 })
         .withMessage('Please write a note between 1 - 250 characters.'),
     handleValidationErrors,
 ];
@@ -67,14 +66,14 @@ asyncHandler(async (req, res) => {
 }));
 
 // Add a movie to a channel
-router.post('/movieToChannel',
-requireAuth,
-validateChannel,
-asyncHandler(async (req, res) => {
-    const { channelId, movieId } = req.body;
-    const channel = await Channel.create({ userId, icon, name });
-    return res.json(channel)
-}));
+// router.post('/movieToChannel',
+// requireAuth,
+// validateChannel,
+// asyncHandler(async (req, res) => {
+//     const { channelId, movieId } = req.body;
+//     const channel = await Channel.create({ userId, icon, name });
+//     return res.json(channel)
+// }));
 
 // Delete a channel
 router.delete('/',
@@ -91,9 +90,9 @@ router.put('/',
 requireAuth,
 validateChannel,
 asyncHandler(async (req, res) => {
-    const { channelId, icon, name } = req.body;
+    const { channelId, name } = req.body;
     const selectedChannel = await Channel.findByPk(channelId)
-    await selectedChannel.update({ icon, name });
+    await selectedChannel.update({ name });
     const channel = await Channel.findByPk(channelId)
     return res.json(channel)
 }))

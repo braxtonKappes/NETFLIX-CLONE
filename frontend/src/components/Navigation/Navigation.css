@@ -112,10 +112,10 @@
 }
 
 .manage-profiles-button.dropdown{
-  font-size: 0.8vw;
+  font-size: 0.7vw;
   text-align: center;
   margin: 1em 0;
-  width: 80%;
+  width: 60%;
 }
 
 .log-out-btn{
@@ -125,7 +125,7 @@
   border: 1px solid gray;
   color: gray;
   cursor: pointer;
-  font-size: 0.8vw;
+  font-size: 0.7vw;
   font-weight: 400;
   letter-spacing: 2px;
   line-height: 17.28px;

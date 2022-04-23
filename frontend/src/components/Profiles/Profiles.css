@@ -23,9 +23,8 @@
 .choose-profile{
     display: flex;
 }
-.choose-profile > :not(:nth-last-child(2)){
-    margin-right: 20px;
-
+.choose-profile > :not(:nth-last-child(1)){
+    margin-right: 30px;
 }
 
 .profile{
@@ -119,7 +118,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 20px;
     height: 200px;
     width: 200px;
 }
