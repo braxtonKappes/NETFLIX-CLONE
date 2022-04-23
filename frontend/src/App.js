@@ -7,6 +7,7 @@ import Login from './components/Login/Login';
 import BrowseParent from './components/BrowseParent/BrowseParent';
 import ManageProfiles from './components/ManageProfiles/ManageProfiles';
 import MyChannels from './components/MyChannels/MyChannels';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className='app'>
       <Navigation isLoaded={isLoaded}/>
+      <Footer />
       {isLoaded && (
         <Switch>
           <Route exact path='/'>

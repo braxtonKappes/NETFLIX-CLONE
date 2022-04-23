@@ -48,7 +48,7 @@ function ProfileButton({ currentProfile }) {
                 </div>
               </div>
             ))}
-            <button onClick={logout}>Log Out</button>
+            <button className="log-out-btn" onClick={logout}>Log Out</button>
           </div>
         </div>
       )}
