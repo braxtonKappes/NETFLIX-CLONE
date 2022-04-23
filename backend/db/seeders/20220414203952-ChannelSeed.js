@@ -8,7 +8,7 @@ module.exports = {
      * Example:*/
     await queryInterface.bulkInsert('Channels', [{
       profileId: '1',
-      name: 'Cringy Films',
+      name: 'Lucifer, is a movie I need to watch!',
       createdAt: 'Wed May 01 2019',
       updatedAt:  'Tue Feb 01 2022'
     }], {});

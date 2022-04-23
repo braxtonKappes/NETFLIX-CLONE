@@ -36,7 +36,7 @@ function App() {
           {/* <Route exact path='/mychannels/:profileId'>
             <MyChannels />
           </Route> */}
-          <Route exact path='/mynotes'>
+          <Route exact path='/mynotes/:profileId'>
             <MyChannels />
           </Route>
           <Route exact path='/profiles/manage'>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import * as profileActions from '../../store/profiles';
 
@@ -8,7 +8,8 @@ function ProfileButton({ currentProfile }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const profiles = useSelector(state => Object.values(state.profiles.allProfiles))
+  const profiles = useSelector(state => state.profiles)
+  const allProfiles = profiles.allProfiles
 
   const openMenu = () => {
     if (showMenu) return;
@@ -39,17 +40,18 @@ function ProfileButton({ currentProfile }) {
       <img onClick={openMenu} src={currentProfile.icon} alt="" className="current-profile-dropdown-icon" />
       {showMenu && (
         <div className="profile-dropdown">
-          <div className="dropdown-profiles-list">
-            {profiles.filter((profile) => profile.id !== currentProfile.id).map(profile => (
+            {Object.values(allProfiles).filter((profile) => profile.id !== currentProfile.id).map(profile => (
               <div key={profile.id} className="dropdown-profile-container">
-                <img src={profile.icon} alt="" className="dropdown-profile-icon" />
+                <img onClick={() => dispatch(profileActions.loadOneProfile(profile.id)).then(() => history.push('/browse'))} src={profile.icon} alt="" className="dropdown-profile-icon" />
                 <div className="dropdown-profile-name">
                   {profile.name}
                 </div>
               </div>
             ))}
-            <button className="log-out-btn" onClick={logout}>Log Out</button>
-          </div>
+            <div className="profile-dropdown-btns">
+              <Link to={'/profiles/manage'} className="manage-profiles-button dropdown">Manage Profiles</Link>
+              <button className="log-out-btn" onClick={logout}>Log Out</button>
+            </div>
         </div>
       )}
     </div>

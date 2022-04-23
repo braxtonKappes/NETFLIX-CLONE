@@ -14,16 +14,16 @@ function ManageProfiles() {
     const userId = session.user.id
     const profiles = useSelector(state => state.profiles)
     const allProfiles = profiles.allProfiles
-    const userProfiles = Object.values(profiles.allProfiles)
     const editProfile = useSelector(state => state.profiles?.editProfile)
 
     useEffect(() => {
         const fetchProfiles = async () => {
-            await dispatch(profileActions.loadAllProfiles(userId))
-            setIsLoaded(true)
+            await dispatch(profileActions.clearCurrentProfileState())
+            .then(dispatch(profileActions.loadAllProfiles(userId)))
+            .then(setIsLoaded(true))
         }
         fetchProfiles();
-    }, [dispatch, allProfiles]);
+    }, [dispatch, userId]);
 
     const handleOnClick = () => {
         setShowProfileToEdit(true)
@@ -37,30 +37,30 @@ function ManageProfiles() {
     } else {
         return isLoaded && (
             <div className="manage-profiles-wrapper">
-                <div className="manage-profiles-content">
                 <h1 className="manage-profiles-title">Manage Profiles</h1>
-                <div className="manage-profiles">
-                    {userProfiles.map(profile => (
-                        <div key={profile.id} className="manage-profile">
-                            <div className="manage-profile-icon-container">
-                                <img
-                                onClick={() => dispatch(profileActions.loadOneProfileToEdit(profile.id)).then(handleOnClick)}
-                                className='edit-pencil-icon'
-                                src={edit_pencil_icon}
-                                alt="edit-pencil-icon" />
-                                <img
-                                    src={profile.icon}
-                                    alt="profile-icon"
-                                    className="manage-profile-icon"
-                                />
+                <div className="manage-profiles-content">
+                    <div className="manage-profiles">
+                        {Object.values(allProfiles).map(profile => (
+                            <div key={profile.id} className="manage-profile">
+                                <div className="manage-profile-icon-container">
+                                    <img
+                                    onClick={() => dispatch(profileActions.loadOneProfileToEdit(profile.id)).then(handleOnClick)}
+                                    className='edit-pencil-icon'
+                                    src={edit_pencil_icon}
+                                    alt="edit-pencil-icon" />
+                                    <img
+                                        src={profile.icon}
+                                        alt="profile-icon"
+                                        className="manage-profile-icon"
+                                    />
+                                </div>
+                                <div className="profile-name-container">
+                                    <h2 className="manage-profile-name">{profile.name}</h2>
+                                </div>
                             </div>
-                            <div className="profile-name-container">
-                                <h2 className="manage-profile-name">{profile.name}</h2>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <Link to={'/browse'} className="manage-profiles-done-btn">Done</Link>
+                        ))}
+                    </div>
+                    <Link to={'/browse'} className="manage-profiles-done-btn">Done</Link>
                 </div>
             </div>
         )

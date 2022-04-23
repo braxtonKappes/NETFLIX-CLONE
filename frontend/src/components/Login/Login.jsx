@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as sessionActions from "../../store/session";
 import * as profileActions from '../../store/profiles'
 import './Login.css'
@@ -14,7 +14,6 @@ function Login() {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [showSignUpComponent, setShowSignUpComponent] = useState(false)
-    const session = useSelector(state => state.session);
 
     const handleSubmit = (e) => {
         e.preventDefault();

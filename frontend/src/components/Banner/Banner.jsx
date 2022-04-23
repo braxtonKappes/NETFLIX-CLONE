@@ -32,7 +32,7 @@ function Banner({currentProfileId}) {
                 <h1 className="banner-title">{movie?.title || movie?.name || movie?.original_name}</h1>
                 <div className="banner-buttons">
                     {/* <button className="banner-button">Play</button> */}
-                    <Link to={`/mychannels/${currentProfileId}`} className="banner-button">My Notes</Link>
+                    <Link to={`/mynotes/${currentProfileId}`} className="banner-button">My Notes</Link>
                 </div>
                 <h1 className="banner-description">
                     {truncate(movie?.overview, 150)}

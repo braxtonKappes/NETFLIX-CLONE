@@ -1,6 +1,7 @@
 .row{
     margin-left: 20px;
     color: white;
+
 }
 
 .row-posters{
@@ -14,11 +15,32 @@
     display: none;
 }
 
-.row-poster{
+.row-poster-container{
     margin-right: 10px;
-    max-height: 100px;
+    max-height: 300px;
     width: 100%;
     object-fit: contain;
+}
+
+.row-poster-container:hover > .hidden-div{
+    display: flex;
+    align-items: center;
+}
+
+.row-poster-container.row-posterLarge{
+    margin-right: 10px;
+    max-height: 450px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.row-poster-container.row-posterLarge:hover > .hidden-div{
+    display: flex;
+    align-items: center;
+}
+
+.row-poster{
+    max-height: 100px;
     transition: transform 450ms;
 }
 
@@ -28,14 +50,11 @@
 
 .row-posterLarge{
     max-height: 250px;
+    transition: transform 450ms;
 }
 
 .row-posterLarge:hover{
-    transform: scale(1.09);
-}
-
-.add-to-channel{
-    cursor: pointer;
+    transform: scale(1.05);
 }
 
 .movie-wrap{
@@ -44,4 +63,32 @@
 
 .row-title{
     margin-top: 10px;
+}
+
+.hidden-div{
+    display: none;
+}
+
+.add-movie-btn{
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid grey;
+    cursor: pointer;
+    color: grey;
+    height: 10vw;
+    width: 10vw;
+    margin-top: 10px;
+    max-height: 25px;
+    max-width: 25px;
+    min-height: 10px;
+    min-width: 10px;
+    border-radius: 50%;
+    font-size: 10px;
+}
+
+.add-to-movies-text{
+    font-size: 1rem;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: center;
 }

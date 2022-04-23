@@ -17,7 +17,6 @@
 .manage-profiles-title{
     color: #fff;
     cursor: default;
-    font-family: "Netflix Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 3.5vw;
     font-weight: unset;
     line-height: 80.64px;
@@ -32,6 +31,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* margin-right: 20px; */
+}
+
+.manage-profiles > :not(:last-child){
+    margin-right: 20px;
 }
 
 .manage-profile{

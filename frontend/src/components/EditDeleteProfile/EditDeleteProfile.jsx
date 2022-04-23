@@ -2,7 +2,7 @@ import './EditDeleteProfile.css'
 import React, { useState } from 'react'
 import * as profileActions from '../../store/profiles'
 import { useDispatch, useSelector } from 'react-redux'
-import edit_pencil_icon from '../../imgs/edit-pencil.svg'
+// import edit_pencil_icon from '../../imgs/edit-pencil.svg'
 import EditProfileIcons from '../EditProfileIcons/EditProfileIcons'
 import { useHistory } from 'react-router-dom'
 
@@ -32,9 +32,9 @@ function EditDeleteProfile({setShowProfileToEdit}) {
         setShowProfileToEdit(false)
     }
 
-    const handleChooseProfileIconToggle = () => {
-        setShowEditProfileIcons(true);
-    }
+    // const handleChooseProfileIconToggle = () => {
+    //     setShowEditProfileIcons(true);
+    // }
 
     const handleOnClickEdit = async (e) => {
         e.preventDefault();

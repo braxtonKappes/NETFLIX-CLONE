@@ -7,14 +7,11 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const validateChannel = [
-    check('icon')
-        .exists({ checkFalsy: true })
-        .notEmpty()
-        .withMessage('Please select a channel icon.'),
     check('name')
         .exists({ checkFalsy: true })
-        .isLength({ min: 1, max: 10 })
-        .withMessage('Please provide a valid channel name.'),
+        .notEmpty()
+        .isLength({ min: 1, max: 250 })
+        .withMessage('Please write a note between 1 - 250 characters.'),
     handleValidationErrors,
 ];
 
@@ -34,7 +31,7 @@ asyncHandler(async(req, res) => {
         //     }
         // }
     })
-    console.log('\n\n\n',channels, '\n\n\n' )
+    // console.log('\n\n\n',channels,'\n\n\n' )
     // const channelMovies = {};
     // channels.forEach( async channel => {
     //     const moviesAndChannels = await Channel_Movie.findAll({
@@ -64,8 +61,8 @@ router.post('/',
 requireAuth,
 validateChannel,
 asyncHandler(async (req, res) => {
-    const { userId, icon, name } = req.body;
-    const channel = await Channel.create({ userId, icon, name });
+    const { profileId, name } = req.body;
+    const channel = await Channel.create({ profileId, name });
     return res.json(channel)
 }));
 

@@ -91,7 +91,6 @@ export const addChannel = (data) => async (dispatch) => {
         dispatch(createChannel(channelData));
         return channelData;
     }
-    return res;
 }
 
 // Delete a channel

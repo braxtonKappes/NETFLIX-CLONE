@@ -28,6 +28,13 @@ module.exports = {
       createdAt: 'Wed May 01 2019',
       updatedAt:  'Tue Feb 01 2022'
       },
+      {
+      userId: '1',
+      icon: `/profile-icons/number_5_bandit.png`,
+      name: '5-Head',
+      createdAt: 'Wed May 01 2019',
+      updatedAt:  'Tue Feb 01 2022'
+      },
     ], {});
   },
 

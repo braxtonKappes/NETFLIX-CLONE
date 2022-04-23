@@ -46,11 +46,11 @@ function Profiles() {
                             </div>
                         </div>
                     ))}
-                {allProfiles.length < 5 && (
-                    <div className="add-profile-button-container">
-                        <button className='add-profile-button' onClick={() => setShowComponent(true)}>+</button>
-                    </div>
-                )}
+                    {allProfiles.length < 5 && (
+                        <div className="add-profile-button-container">
+                            <button className='add-profile-button' onClick={() => setShowComponent(true)}>+</button>
+                        </div>
+                    )}
                 </div>
                 {Object.keys(profiles.allProfiles).length > 0 && (
                     <Link to={'/profiles/manage'} className="manage-profiles-button">Manage Profiles</Link>
