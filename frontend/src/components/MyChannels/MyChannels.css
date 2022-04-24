@@ -1,11 +1,8 @@
-.mc-wrapper{
-    background: #141414;
-    min-height: 100vh;
-    width: 100%;
+.mc-content{
+    position: relative;
 }
 
 .mc-title-container{
-    position: absolute;
     border-bottom: 1px solid grey;
     width: 100%;
 }
@@ -19,14 +16,23 @@
     line-height: 80.64px;
     opacity: 1;
     margin-top: 5rem;
-    margin-left: 15px;
+    margin-left: 20px;
     transition: opacity .4s ease-out;
 }
 
+.add-a-note-subtitle{
+    margin-left: 15px;
+}
+
 .add-a-note-form-container{
-    position: absolute;
-    top: 200px;
-    left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 100%;
+    margin-top: 20px;
+    margin-left: 20px;
     color: #fff;
 }
 
@@ -35,18 +41,18 @@
     position: relative;
     margin-top: 5px;
     flex-direction: column;
+    margin-left: 15px;
 }
 
 .add-a-note-form > textarea{
     outline: none;
     resize: none;
-    min-width: 300px;
+    min-width: 400px;
     min-height: 100px;
     padding-top: 5px;
     padding-left: 5px;
     border-radius: 3px 3px 0 0;
     overflow: hidden;
-
 }
 
 .add-note-add-btn{
@@ -84,4 +90,108 @@
     color: rgba(0, 0, 0, 0.6);
     top: 92px;
     right: 7px;
+}
+
+.channel-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 600px;
+}
+
+.mc-note{
+    display: list-item;
+    list-style-type: disc;
+    width: 300px;
+    padding-right: 30px;
+    color: #fff;
+    overflow-wrap: break-word;
+}
+
+.mc-note-container{
+    margin-bottom: 30px;
+    width: 600px;
+}
+
+.mc-note-container:last-child{
+    padding-bottom: 60px;
+}
+
+.mc-btn-container{
+    display: flex;
+}
+
+.mc-edit-btn{
+    appearance: button;
+    background-color: transparent;
+    border: 1px solid gray;
+    color: gray;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.6vw;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 17.28px;
+    margin: 2em 20px 1em 0;
+    overflow: visible;
+    padding: .5em 1.5em;
+    text-align: center;
+    text-transform: none;
+}
+
+.mc-edit-btn:hover{
+    border-color: #fff;
+    color: #fff;
+}
+
+.mc-edit-btn:focus{
+    border-color: #fff;
+    color: #fff;
+}
+
+.mc-delete-btn{
+    appearance: button;
+    background-color: transparent;
+    border: 1px solid gray;
+    color: gray;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.6vw;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 17.28px;
+    margin: 2em 20px 1em 0;
+    overflow: visible;
+    padding: .5em 1.5em;
+    text-align: center;
+    text-transform: none;
+}
+
+.mc-delete-btn:hover{
+    border-color: #fff;
+    color: #fff;
+}
+
+.mc-delete-btn:focus{
+    border-color: #fff;
+    color: #fff;
+}
+
+.edit-show-stuff{
+    display: flex;
+    flex-direction: column;
+    padding-left: 45px;
+    position: relative;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.mc-edit-input{
+    display: flex;
+    outline: none;
+    resize: none;
+    text-align:start;
+    width: 365px;
+    height: 100px;
 }

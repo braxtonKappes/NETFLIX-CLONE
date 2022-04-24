@@ -4,7 +4,7 @@ import axios from '../../axios';
 import ErrorImg from '../../imgs/No-Image-Found.png'
 import { useDispatch, useSelector } from 'react-redux';
 import * as channelActions from '../../store/myChannels'
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Row({title, fetchUrl, isLargeRow}) {
     const dispatch = useDispatch();
@@ -49,7 +49,7 @@ function Row({title, fetchUrl, isLargeRow}) {
                         {/* {(
                             <button onClick={() => dispatch(channelActions.addChannel({profileId: profileId, name: `${movie.name}, is a movie/show I need to watch!`}))} className='add-movie-btn'>+</button>
                         )} */}
-                        <Link className="add-to-movies-text" to={`/mynotes/${profileId}`} onClick={() => dispatch(channelActions.addChannel({profileId: profileId, name: `${movie.name}, is a movie/show I need to watch!`}))} >Add to notes?</Link>
+                        <Link className="add-to-movies-text" to={`/mynotes/${profileId}`} onClick={() => dispatch(channelActions.addChannel({profileId: profileId, name: `I need to watch ${movie.name}!`}))} >Add to notes?</Link>
                     </div>
                 </div>
                 ))}

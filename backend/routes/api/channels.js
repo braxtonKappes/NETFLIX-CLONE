@@ -9,7 +9,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 const validateChannel = [
     check('name')
         .exists({ checkFalsy: true })
-        .isLength({ max: 250 })
+        .isLength({ min: 1, max: 250 })
         .withMessage('Please write a note between 1 - 250 characters.'),
     handleValidationErrors,
 ];

@@ -22,9 +22,6 @@ function ProfileButton() {
     }, [showMenu]);
     return (
         <div className="footerInfoContainer">
-                <div className="infoButton" onClick={openMenu}>
-                    <i className="fa-solid fa-circle-info"></i>
-                </div>
                 {showMenu && (
                     <div className="infoBar">
                         <div className="icons">
@@ -47,6 +44,9 @@ function ProfileButton() {
                         </div>
                     </div>
                 )}
+                <div className="infoButton" onClick={openMenu}>
+                    <i className="fa-solid fa-circle-info"></i>
+                </div>
         </div>
     );
 }

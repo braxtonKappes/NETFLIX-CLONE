@@ -8,6 +8,7 @@ const REMOVE_CHANNEL = 'channels/REMOVE_CHANNEL'
 const EDIT_CHANNEL = 'channels/EDIT_CHANNEL'
 const CLEAR_CHANNELS_STATE = 'channels/CLEAR_CHANNELS_STATE'
 const CLEAR_CURRENT_CHANNEL_STATE = 'channels/CLEAR_CURRENT_CHANNEL_STATE'
+const CLEAR_CURRENT_EDIT_CHANNEL_STATE = 'channels/CLEAR_CURRENT_EDIT_CHANNEL_STATE'
 
 // actions
 const load_All_Channels = (channels) => ({
@@ -46,6 +47,10 @@ const clearAllChannelsState = () => ({
 
 const clearCurrentChannelStateAction = () => ({
     type: CLEAR_CURRENT_CHANNEL_STATE
+})
+
+const clearCurrentEditChannelStateAction = () => ({
+    type: CLEAR_CURRENT_EDIT_CHANNEL_STATE
 })
 
 /* thunks */
@@ -131,6 +136,11 @@ export const clearCurrentChannelState = () => async (dispatch) => {
     dispatch(clearCurrentChannelStateAction())
 }
 
+// Clear current edit channel
+export const clearCurrentEditChannelState = () => async (dispatch) => {
+    dispatch(clearCurrentEditChannelStateAction())
+}
+
 // Reducer
 const channelsReducer = (state={
     currentChannel: {},
@@ -172,6 +182,10 @@ const channelsReducer = (state={
         }
         case CLEAR_CURRENT_CHANNEL_STATE: {
             newState.currentChannel = {}
+            return newState;
+        }
+        case CLEAR_CURRENT_EDIT_CHANNEL_STATE: {
+            newState.editChannel = {}
             return newState;
         }
         default: {

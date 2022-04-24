@@ -32,7 +32,8 @@
 .edit-profile-middle-container > input{
     appearance: none;
     border: 1px solid #8c8c8c;
-    border-radius: 5px;
+    border-radius: 3px;
+    outline: none;
     box-sizing: border-box;
     color: #000;
     cursor: text;
