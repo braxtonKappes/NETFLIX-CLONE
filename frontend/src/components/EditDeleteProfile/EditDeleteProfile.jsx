@@ -23,9 +23,12 @@ function EditDeleteProfile({setShowProfileToEdit}) {
 
         if (Object.keys(allProfiles).length === 1) {
             await dispatch(profileActions.delProfile(editProfile.id))
+            .then(setShowProfileToEdit(false))
             .then(history.push('/browse'));
-        } else await dispatch(profileActions.delProfile(editProfile.id));
-        setShowProfileToEdit(false)
+        } else {
+        await dispatch(profileActions.delProfile(editProfile.id))
+        .then(setShowProfileToEdit(false))
+        }
     }
 
     const handleToggle = () => {

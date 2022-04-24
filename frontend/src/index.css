@@ -4,6 +4,10 @@
     /* overflow-x: hidden; */
 }
 
+input{
+    outline: none;
+}
+
 body{
     background-color: #111;
 }
