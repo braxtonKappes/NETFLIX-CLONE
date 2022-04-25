@@ -7,32 +7,36 @@ import EditProfileIcons from '../EditProfileIcons/EditProfileIcons'
 import { useHistory } from 'react-router-dom'
 
 function EditDeleteProfile({setShowProfileToEdit}) {
+    const profiles = useSelector(state => state.profiles)
     const history = useHistory();
     const dispatch = useDispatch();
     const [showEditProfileIcons, setShowEditProfileIcons] = useState(false)
     const [errors, setErrors] = useState([]);
     const profileId = useSelector(state => state.profiles?.editProfile.id);
-    const editProfile = useSelector(state => state.profiles?.editProfile)
-    const [profileName, setProfileName] = useState(editProfile.name);
-    const [profileIcon, setProfileIcon] = useState(editProfile.icon);
-    const profiles = useSelector(state => state.profiles)
+    const editProfileName = profiles.editProfile.name
+    const editProfileIcon = profiles.editProfile.icon
+    const [profileName, setProfileName] = useState(editProfileName);
+    const [profileIcon, setProfileIcon] = useState(editProfileIcon);
+    const editProfile = profiles.editProfile
+    const editProfileId = profiles.editProfile.id
     const allProfiles = profiles.allProfiles
 
     const handleOnClickDelete = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
         if (Object.keys(allProfiles).length === 1) {
-            await dispatch(profileActions.delProfile(editProfile.id))
+            await dispatch(profileActions.delProfile(editProfileId))
             .then(setShowProfileToEdit(false))
             .then(history.push('/browse'));
         } else {
-        await dispatch(profileActions.delProfile(editProfile.id))
-        .then(setShowProfileToEdit(false))
+            await dispatch(profileActions.delProfile(editProfileId))
+            .then(setShowProfileToEdit(false))
         }
     }
 
-    const handleToggle = () => {
-        setShowProfileToEdit(false)
+    const handleToggle = async () => {
+        await dispatch(profileActions.clearCurrentEditProfileState())
+        .then(setShowProfileToEdit(false))
     }
 
     // const handleChooseProfileIconToggle = () => {
@@ -50,8 +54,9 @@ function EditDeleteProfile({setShowProfileToEdit}) {
         }
 
         try {
-            await dispatch(profileActions.editProfile(data));
-            setShowProfileToEdit(false)
+            await dispatch(profileActions.editProfile(data))
+            .then(dispatch(profileActions.clearCurrentEditProfileState()))
+            .then(setShowProfileToEdit(false))
         } catch (res) {
             const data = await res.json();
             if (data && data.errors) setErrors(data.errors);
@@ -89,9 +94,9 @@ function EditDeleteProfile({setShowProfileToEdit}) {
                         />
                     </div>
                     <div className="edit-profile-bottom-container">
-                        <button onClick={handleOnClickEdit} className="edit-profile-save-btn">Save</button>
-                        <button onClick={handleToggle} className="edit-profile-cancel-btn">Cancel</button>
-                        <button onClick={handleOnClickDelete} className="edit-profile-delete-btn">Delete Profile</button>
+                        <button onClick={() => handleOnClickEdit()} className="edit-profile-save-btn">Save</button>
+                        <button onClick={() => handleToggle()} className="edit-profile-cancel-btn">Cancel</button>
+                        <button onClick={() => handleOnClickDelete()} className="edit-profile-delete-btn">Delete Profile</button>
                     </div>
                 </div>
             </div>

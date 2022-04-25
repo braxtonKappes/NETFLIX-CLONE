@@ -2,11 +2,13 @@ import './Row.css';
 import React, { useEffect, useState } from 'react';
 import axios from '../../axios';
 import ErrorImg from '../../imgs/No-Image-Found.png'
+// eslint-disable-next-line
 import { useDispatch, useSelector } from 'react-redux';
-import * as channelActions from '../../store/myChannels'
+// import * as channelActions from '../../store/myChannels'
 import { Link } from 'react-router-dom';
 
 function Row({title, fetchUrl, isLargeRow}) {
+    // eslint-disable-next-line
     const dispatch = useDispatch();
     // const [showCheckMark, setShowCheckMark] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false)
@@ -49,7 +51,7 @@ function Row({title, fetchUrl, isLargeRow}) {
                         {/* {(
                             <button onClick={() => dispatch(channelActions.addChannel({profileId: profileId, name: `${movie.name}, is a movie/show I need to watch!`}))} className='add-movie-btn'>+</button>
                         )} */}
-                        <Link className="add-to-movies-text" to={`/mynotes/${profileId}`} onClick={() => dispatch(channelActions.addChannel({profileId: profileId, name: `I need to watch ${movie.name}!`}))} >Add to notes?</Link>
+                        <Link className="add-to-movies-text" to={`/mynotes/${profileId}`}  >Add to notes?</Link>
                     </div>
                 </div>
                 ))}

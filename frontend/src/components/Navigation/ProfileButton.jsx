@@ -49,7 +49,7 @@ function ProfileButton({ currentProfile }) {
               </div>
             ))}
             <div className="profile-dropdown-btns">
-              <Link to={'/profiles/manage'} className="manage-profiles-button dropdown">Manage Profiles</Link>
+              <Link to={'/profiles/manage'} onClick={() => dispatch(profileActions.clearCurrentProfileState())} className="manage-profiles-button dropdown">Manage Profiles</Link>
               <button className="log-out-btn" onClick={logout}>Log Out</button>
             </div>
         </div>

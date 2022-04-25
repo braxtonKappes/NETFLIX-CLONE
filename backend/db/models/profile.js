@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Profile.belongsTo(models.User, { foreignKey: 'userId'})
+      Profile.belongsTo(models.User, { foreignKey: 'userId' })
+      Profile.hasMany(models.Channel, { foreignKey: 'profileId', onDelete: 'cascade', hooks: true })
     }
   };
   Profile.init({

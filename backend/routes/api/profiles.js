@@ -49,12 +49,15 @@ asyncHandler(async (req, res) => {
 }));
 
 // Delete a profile
-router.delete('/',
+router.delete('/:profileId',
 requireAuth,
 asyncHandler(async (req, res) => {
-    const { profileId } = req.body;
-    const profile = await Profile.findByPk(profileId)
-    await profile.destroy()
+    const profileId = req.params.profileId;
+    await Profile.destroy({
+        where: {
+            id: profileId
+        }
+    })
     return res.json(profileId)
 }));
 

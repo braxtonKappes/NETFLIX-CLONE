@@ -13,6 +13,7 @@ module.exports = {
         references: {
           model: 'Profiles'
         },
+        onDelete: 'cascade',
       },
       name: {
         type: Sequelize.STRING

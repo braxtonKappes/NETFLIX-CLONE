@@ -90,8 +90,11 @@
     color: white;
     font-size: 1rem;
     margin-top: 10px;
-    /* margin-left: 10px; */
     text-align: center;
+}
+
+.add-to-movies-text:hover{
+    color: wheat;
 }
 
 .checkmark__circle {

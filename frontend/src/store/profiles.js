@@ -8,6 +8,7 @@ const REMOVE_PROFILE = 'profiles/REMOVE_PROFILE'
 const EDIT_PROFILE = 'profiles/EDIT_PROFILE'
 const CLEAR_PROFILES_STATE = 'profiles/CLEAR_PROFILES_STATE'
 const CLEAR_CURRENT_PROFILE_STATE = 'profiles/CLEAR_CURRENT_PROFILE_STATE'
+const CLEAR_CURRENT_EDIT_PROFILE_STATE = 'profiles/CLEAR_CURRENT_EDIT_PROFILE_STATE'
 
 // actions
 const loadAll = (profiles) => ({
@@ -46,6 +47,10 @@ const clearAllProfilesState = () => ({
 
 const clearCurrentProfileStateAction = () => ({
     type: CLEAR_CURRENT_PROFILE_STATE
+})
+
+const clearCurrentEditProfileStateAction = () => ({
+    type: CLEAR_CURRENT_EDIT_PROFILE_STATE
 })
 
 /* thunks */
@@ -92,9 +97,8 @@ export const addProfile = (data) => async (dispatch) => {
 
 // Delete a profile
 export const delProfile = (profileId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/profiles`, {
+    const res = await csrfFetch(`/api/profiles/${profileId}`, {
         method: `DELETE`,
-        body: JSON.stringify({profileId}),
     });
     if (res.ok) {
         const profileId = await res.json();
@@ -124,6 +128,11 @@ export const clearAllProfileState = () => async (dispatch) => {
 // Clear current profile
 export const clearCurrentProfileState = () => async (dispatch) => {
     dispatch(clearCurrentProfileStateAction())
+}
+
+// Clear current profile
+export const clearCurrentEditProfileState = () => async (dispatch) => {
+    dispatch(clearCurrentEditProfileStateAction())
 }
 
 // Reducer
@@ -167,6 +176,10 @@ const profilesReducer = (state={
         }
         case CLEAR_CURRENT_PROFILE_STATE: {
             newState.currentProfile = {}
+            return newState
+        }
+        case CLEAR_CURRENT_EDIT_PROFILE_STATE: {
+            newState.editProfile = {}
             return newState
         }
         default: {

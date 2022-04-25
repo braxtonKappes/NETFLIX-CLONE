@@ -59,7 +59,7 @@ function ManageProfiles() {
                             </div>
                         ))}
                     </div>
-                    <Link to={'/browse'} className="manage-profiles-done-btn">Done</Link>
+                    <Link to={'/browse'} onClick={() => dispatch(profileActions.clearCurrentEditProfileState())} className="manage-profiles-done-btn">Done</Link>
                 </div>
             </div>
         )
