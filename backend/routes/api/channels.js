@@ -20,7 +20,7 @@ asyncHandler(async(req, res) => {
     const profileId = req.params.profileId;
     const channels = await Channel.findAll({
         where: {
-            profileId
+            profileId: profileId
         },
         // include: {
         //     model: Movie,
