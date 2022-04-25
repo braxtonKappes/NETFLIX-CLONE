@@ -44,7 +44,7 @@ function EditDeleteProfile({setShowProfileToEdit}) {
     // }
 
     const handleOnClickEdit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         setErrors([]);
 
         const data = {
